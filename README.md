@@ -15,15 +15,15 @@ Patrik Marinić
 Hrvatski
 
 # Opis atributa koji se nalaze u skupu podataka:   
-1.ID: Jedinstveni identifikator za svakog ljubimca u bazi podataka. Koristi se za jednoznačno razlikovanje ljubimaca.
-2.Ime: Ime ljubimca, obično dodijeljeno od strane vlasnika ili skrbnika ljubimca.
-3.Vrsta: Vrsta ljubimca, kao što su pas, mačka, kornjača, hrčak, itd.
-4.Spol: Spol ljubimca, može biti "Mužjak" ili "Ženka."
-5.Starost: Starost ljubimca, izražena u godinama.
-6.Životni Vijek: Očekivani životni vijek ljubimca, također izražen u godinama.
-7.Boja: Boja ljubimca, opisuje njegovu vanjsku boju ili uzorak.
-8.Ime Vlasnika: Ime vlasnika ili skrbnika ljubimca.
-9.Prehrana: Informacije o prehrani ljubimca, kao što su vrsta hrane koju konzumira (npr. mesožder, biljožder).
-10.Igračke (Naziv, Boja): Ovo je složeni atribut koji sadrži podatke o igračkama koje pripadaju ljubimcu. Sastoji se od dva potatributa:
-    Naziv: Ime igračke koju ljubimac ima za igru.
-    Boja: Boja igračke, opisuje boju same igračke.
+1.ID: Jedinstveni identifikator za svakog ljubimca u bazi podataka. Koristi se za jednoznačno razlikovanje ljubimaca.  
+2.Ime: Ime ljubimca, obično dodijeljeno od strane vlasnika ili skrbnika ljubimca.  
+3.Vrsta: Vrsta ljubimca, kao što su pas, mačka, kornjača, hrčak, itd.  
+4.Spol: Spol ljubimca, može biti "Mužjak" ili "Ženka."  
+5.Starost: Starost ljubimca, izražena u godinama.  
+6.Životni Vijek: Očekivani životni vijek ljubimca, također izražen u godinama.  
+7.Boja: Boja ljubimca, opisuje njegovu vanjsku boju ili uzorak.  
+8.Ime Vlasnika: Ime vlasnika ili skrbnika ljubimca.  
+9.Prehrana: Informacije o prehrani ljubimca, kao što su vrsta hrane koju konzumira (npr. mesožder, biljožder).  
+10.Igračke (Naziv, Boja): Ovo je složeni atribut koji sadrži podatke o igračkama koje pripadaju ljubimcu. Sastoji se od dva potatributa:  
+    Naziv: Ime igračke koju ljubimac ima za igru.  
+    Boja: Boja igračke, opisuje boju same igračke.  
