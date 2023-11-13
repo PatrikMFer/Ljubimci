@@ -1,29 +1,27 @@
-# Ljubimci   
-Ovaj repozitorij sadrži podatke o različitim ljubimcima, uključujući informacije o njihovim imenima, vrsti, spolu, boji, starosti te njihovim vlasnicima. Podaci su organizirani u strukturi tablice kako bi omogućili jednostavan pristup i pregled. 
+# React + TypeScript + Vite
 
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-# Creative Commons Zero v1.0 Universal (CC0)   
-vrsta je licenciranja za autorska prava koja omogućuje autorima da svoja djela u potpunosti oslobode od autorskih prava i dopuste slobodnu upotrebu, dijeljenje i prilagodbu tih djela od strane drugih korisnika. Ovo je jedna od najotvorenijih i najfleksibilnijih licenci koja praktički omogućava da djela postanu dijelom "javnog dobra."
+Currently, two official plugins are available:
 
-# Naziv autora:   
-Patrik Marinić
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-# Verzija skupa podataka:    
-1.0
+## Expanding the ESLint configuration
 
-# Jezik u kojemu se nalaze podaci:   
-Hrvatski
+If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-# Opis atributa koji se nalaze u skupu podataka:   
-1. ID: Jedinstveni identifikator za svakog ljubimca u bazi podataka. Koristi se za jednoznačno razlikovanje ljubimaca.  
-2. Ime: Ime ljubimca, obično dodijeljeno od strane vlasnika ili skrbnika ljubimca.  
-3. Vrsta: Vrsta ljubimca, kao što su pas, mačka, kornjača, hrčak, itd.  
-4. Spol: Spol ljubimca, može biti "Mužjak" ili "Ženka."  
-5. Starost: Starost ljubimca, izražena u godinama.  
-6. Životni Vijek: Očekivani životni vijek ljubimca, također izražen u godinama.  
-7. Boja: Boja ljubimca, opisuje njegovu vanjsku boju ili uzorak.  
-8. Ime Vlasnika: Ime vlasnika ili skrbnika ljubimca.  
-9. Prehrana: Informacije o prehrani ljubimca, kao što su vrsta hrane koju konzumira (npr. mesožder, biljožder).  
-10. Igračke (Naziv, Boja): Ovo je složeni atribut koji sadrži podatke o igračkama koje pripadaju ljubimcu. Sastoji se od dva potatributa:  
-    1. Naziv: Ime igračke koju ljubimac ima za igru.  
-    2. Boja: Boja igračke, opisuje boju same igračke.  
+- Configure the top-level `parserOptions` property like this:
+
+```js
+   parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+    project: ['./tsconfig.json', './tsconfig.node.json'],
+    tsconfigRootDir: __dirname,
+   },
+```
+
+- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
+- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
+- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
