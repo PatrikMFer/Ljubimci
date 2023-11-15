@@ -78,35 +78,29 @@ const DataTable = () => {
     );
 
   // Funkcija za generiranje JSON podataka
-  const generateJSON = async () => {
-    try {
-      // Dohvati podatke ako nisu preuzeti
-      if (!data || data.length === 0) {
-        const response = await fetch("http://localhost:8080/api/igracke");
-        const result = await response.json();
-        setData(result);
-      }
-
-      // Provjeri jesu li podaci dostupni
-      if (!data || data.length === 0) {
-        console.error("No data available.");
-        return;
-      }
-
-      // Pripremi podatke za JSON
-      const jsonData = JSON.stringify(data, null, 2);
-
-      // Kreiraj Blob objekt s JSON podacima
-      const blob = new Blob([jsonData], {
-        type: "application/json;charset=utf-8",
-      });
-
-      // Snimi JSON datoteku
-      saveAs(blob, "data.json");
-    } catch (error) {
-      console.error("Error generating JSON:", error);
+const generateJSON = async () => {
+  try {
+    // Provjeri jesu li podaci dostupni
+    if (!rows || rows.length === 0) {
+      console.error("No data available.");
+      return;
     }
-  };
+
+    // Pripremi podatke za JSON
+    const jsonData = JSON.stringify(rows.map(row => row.original), null, 2);
+
+    // Kreiraj Blob objekt s JSON podacima
+    const blob = new Blob([jsonData], {
+      type: "application/json;charset=utf-8",
+    });
+
+    // Snimi JSON datoteku
+    saveAs(blob, "data.json");
+  } catch (error) {
+    console.error("Error generating JSON:", error);
+  }
+};
+
 
   // Funkcija za generiranje CSV podataka
   const generateCSV = () => {
