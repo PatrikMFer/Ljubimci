@@ -1,6 +1,7 @@
-import { useState, useEffect, useMemo } from "react";
+  import { useState, useEffect, useMemo } from "react";
 import { useTable, useSortBy } from "react-table";
 import { saveAs } from "file-saver";
+import "./DataTable.css"
 
 const DataTable = () => {
   const [data, setData] = useState([]);
@@ -162,6 +163,7 @@ const DataTable = () => {
             onChange={(e) => setSearchText(e.target.value)}
           />
         </label>
+        <br />
         <label>
           Odaberi atribut:
           <select
@@ -179,7 +181,10 @@ const DataTable = () => {
             ))}
           </select>
         </label>
+        <br />
         <button onClick={handleSearch}>Pretraži</button>
+        <br />
+        <br />
       </div>
       <table {...getTableProps()} border="1">
         <thead>
@@ -207,11 +212,13 @@ const DataTable = () => {
           })}
         </tbody>
       </table>
+      <div className="buttons">
       {/* Link za preuzimanje JSON-a */}
-      <button onClick={generateJSON}>Preuzmi JSON</button>
+      <button onClick={generateJSON} className="json">Preuzmi JSON</button>
 
       {/* Link za preuzimanje CSV-a */}
-      <button onClick={generateCSV}>Preuzmi CSV</button>
+      <button onClick={generateCSV} className="csv">Preuzmi CSV</button>
+      </div>
     </div>
   );
 };
