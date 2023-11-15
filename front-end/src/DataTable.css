@@ -9,6 +9,7 @@ button {
     background: #007BFF;
     color: white;
     border: none;
+    padding: 7px;
 }
 
 .csv, .json {
