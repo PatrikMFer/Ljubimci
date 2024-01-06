@@ -1,64 +1,51 @@
-CREATE TABLE IF NOT EXISTS public.igracka
+CREATE TABLE Vlasnik
 (
-    id integer NOT NULL,
-    naziv character varying(50) COLLATE pg_catalog."default" NOT NULL,
-    boja character varying(20) COLLATE pg_catalog."default" NOT NULL,
-    ljubimacid integer,
-    CONSTRAINT igracka_pkey PRIMARY KEY (id),
-    CONSTRAINT igracka_ljubimacid_fkey FOREIGN KEY (ljubimacid)
-        REFERENCES public.ljubimac (id) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION
-)
+    idVlasnik SERIAL PRIMARY KEY,
+    imeVlasnik VARCHAR(50) NOT NULL,
+    prezimeVlasnik VARCHAR(50) NOT NULL
+);
 
 
-CREATE TABLE IF NOT EXISTS public.ljubimac
+CREATE TABLE Ljubimac
 (
-    id integer NOT NULL,
-    ime character varying(50) COLLATE pg_catalog."default" NOT NULL,
-    vrsta character varying(50) COLLATE pg_catalog."default" NOT NULL,
-    spol character varying(10) COLLATE pg_catalog."default" NOT NULL,
-    starost integer NOT NULL,
-    zivotnivijek integer NOT NULL,
-    boja character varying(20) COLLATE pg_catalog."default" NOT NULL,
-    imevlasnika character varying(50) COLLATE pg_catalog."default" NOT NULL,
-    prehrana character varying(50) COLLATE pg_catalog."default" NOT NULL,
-    CONSTRAINT ljubimac_pkey PRIMARY KEY (id)
-)
+    IdLjubimac SERIAL PRIMARY KEY,
+    imeLjubimac VARCHAR(50) NOT NULL,
+    vrsta VARCHAR(50) NOT NULL,
+    spol VARCHAR(25) NOT NULL,
+    dob INT NOT NULL,
+    boja VARCHAR(50) NOT NULL,
+    prehrana VARCHAR(25) NOT NULL,
+    adresa VARCHAR(50) NOT NULL,
+    veterinar VARCHAR(50) NOT NULL,
+    idVlasnik INT NOT NULL,
+    FOREIGN KEY (idVlasnik) REFERENCES Vlasnik(idVlasnik),
+    UNIQUE (idVlasnik)
+);
 
-INSERT INTO Ljubimac (ID, Ime, Vrsta, Spol, Starost, ZivotniVijek, Boja, ImeVlasnika, Prehrana)
-VALUES
-	(1, 'Kira', 'Pas', 'Ženka', 3, 11, 'Žuta', 'Ivan', 'Mesožder'),
-	(2, 'Korni', 'Kornjača', 'Ženka', 6, 30, 'Zelena', 'Fran', 'Svežder'),
-	(3, 'Micika', 'Mačka', 'Ženka', 2, 17, 'Bijela', 'Tomislav', 'Mesožder'),
-	(4, 'Anđa', 'Riba', 'Ženka', 3, 13, 'Narančasta', 'Ivona', 'Biljožder'),
-	(5, 'Gricko', 'Hrčak', 'Mužjak', 1, 3, 'Smeđa', 'Lora', 'Mesožder'),
-	(6, 'Rex', 'Pas', 'Mužjak', 4, 12, 'Crna', 'Marija', 'Mesožder'),
-	(7, 'Rafaelo', 'Kornjača', 'Ženka', 7, 40, 'Zelena', 'Marko', 'Svežder'),
-	(8, 'Leo', 'Mačka', 'Mužjak', 5, 15, 'Siva', 'Ana', 'Mesožder'),
-	(9, 'Šara', 'Riba', 'Ženka', 2, 10, 'Zlatna', 'David', 'Biljožder'),
-	(10, 'Koko', 'Kakadu', 'Mužjak', 10, 50, 'Bijela', 'Tamara', 'Biljožder');
-	
-INSERT INTO Igracka (ID, Naziv, Boja, LjubimacID)
-VALUES
-	(1, 'Lopta', 'Crvena', 1),
-	(2, 'Uže', 'Plava', 1);
-	(3, 'Tobogan', 'Žuta', 2);
-	(3, 'Tobogan', 'Plava', 2);
-	(5, 'Zvonce', 'Roza', 3),
-	(6, 'Plišanac', 'Smeđa', 3);
-	(7, 'Kuglice', 'Siva', 4),
-	(8, 'Štapići', 'Zelena', 4);
-	(9, 'Kolotur', 'Plava', 5),
-	(10, 'Tobogan', 'Zelena', 5);
-	(11, 'Lopta', 'Žuta', 6),
-	(12, 'Pliš', 'Roza', 6);
-	(13, 'Kamen', 'Siva', 7),
-	(14, 'Plastika', 'Narančasta', 7);
-	(15, 'Miš', 'Smeđa', 8),
-	(16, 'Konop', 'Zelena', 8);
-	(17, 'Alge', 'Zelena', 9),
-	(18, 'Kamen', 'Siva', 9);
-	(19, 'Zvonce', 'Zlatna', 10),
-	(20, 'Ljuljačka', 'Crvena', 10);
 
+INSERT INTO vlasnik (imeVlasnik, prezimeVlasnik)
+VALUES
+    ('Marko', 'Horvat'),
+    ('Ana', 'Marić'),
+    ('Petra', 'Novak'),
+    ('Ivan', 'Kovačić'),
+    ('Ivana', 'Barić'),
+    ('Marko', 'Vuković'),
+    ('Petra', 'Horvat'),
+    ('Ana', 'Kovač'),
+    ('Ivana', 'Novak'),
+    ('Luka', 'Horvat');
+
+
+INSERT INTO ljubimac (imeLjubimac, vrsta, spol, dob, boja, prehrana, adresa, veterinar, idvlasnik)
+VALUES
+    ('Buddy', 'pas', 'muški', 3, 'smeđa', 'mesožder', 'Zagreb', 'Dr. Ana Kovač', 1),
+    ('Whiskers', 'mačka', 'ženski', 2, 'siva', 'mesožder', 'Split', 'Dr. Ivan Petrović', 2),
+    ('Rocky', 'pas', 'muški', 4, 'crna i smeđa', 'mesožder', 'Rijeka', 'Dr. Marta Tomić', 3),
+    ('Mittens', 'mačka', 'ženski', 1, 'bijela', 'mesožder', 'Osijek', 'Dr. Maja Horvat', 4),
+    ('Fluffy', 'hrčak', 'neuter', 0.5, 'smeđi', 'biljožder', 'Zadar', 'Dr. Petra Kovač', 5),
+    ('Lola', 'pas', 'ženski', 2, 'crna', 'mesožder', 'Pula', 'Dr. Luka Novak', 6),
+    ('Oliver', 'mačka', 'muški', 3, 'narandžasta', 'mesožder', 'Varaždin', 'Dr. Marija Kovač', 7),
+    ('Oreo', 'hrčak', 'neuter', 0.3, 'crno-bijeli', 'biljožder', 'Karlovac', 'Dr. Ivan Barić', 8),
+    ('Polly', 'papiga', 'neuter', 2, 'šareno', 'biljožder', 'Zagreb', 'Dr. Ana Kovač', 9),
+    ('Shelly', 'kornjača', 'neuter', 5, 'zelena', 'biljožder', 'Zadar', 'Dr. Petra Kovač', 10);

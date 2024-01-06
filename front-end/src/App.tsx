@@ -1,5 +1,5 @@
 import "./App.css";
-import DataTable from "./DataTable";
+import DataTable from "./LjubimciDataTable";
 
 function App() {
   return <DataTable />;
