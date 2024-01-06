@@ -1,6 +1,7 @@
-import { useState, useEffect, useMemo } from "react";
+  import { useState, useEffect, useMemo } from "react";
 import { useTable, useSortBy } from "react-table";
 import { saveAs } from "file-saver";
+import "./DataTable.css"
 
 const DataTable = () => {
   const [data, setData] = useState([]);
@@ -77,35 +78,29 @@ const DataTable = () => {
     );
 
   // Funkcija za generiranje JSON podataka
-  const generateJSON = async () => {
-    try {
-      // Dohvati podatke ako nisu preuzeti
-      if (!data || data.length === 0) {
-        const response = await fetch("http://localhost:8080/api/igracke");
-        const result = await response.json();
-        setData(result);
-      }
-
-      // Provjeri jesu li podaci dostupni
-      if (!data || data.length === 0) {
-        console.error("No data available.");
-        return;
-      }
-
-      // Pripremi podatke za JSON
-      const jsonData = JSON.stringify(data, null, 2);
-
-      // Kreiraj Blob objekt s JSON podacima
-      const blob = new Blob([jsonData], {
-        type: "application/json;charset=utf-8",
-      });
-
-      // Snimi JSON datoteku
-      saveAs(blob, "data.json");
-    } catch (error) {
-      console.error("Error generating JSON:", error);
+const generateJSON = async () => {
+  try {
+    // Provjeri jesu li podaci dostupni
+    if (!rows || rows.length === 0) {
+      console.error("No data available.");
+      return;
     }
-  };
+
+    // Pripremi podatke za JSON
+    const jsonData = JSON.stringify(rows.map(row => row.original), null, 2);
+
+    // Kreiraj Blob objekt s JSON podacima
+    const blob = new Blob([jsonData], {
+      type: "application/json;charset=utf-8",
+    });
+
+    // Snimi JSON datoteku
+    saveAs(blob, "data.json");
+  } catch (error) {
+    console.error("Error generating JSON:", error);
+  }
+};
+
 
   // Funkcija za generiranje CSV podataka
   const generateCSV = () => {
@@ -162,6 +157,7 @@ const DataTable = () => {
             onChange={(e) => setSearchText(e.target.value)}
           />
         </label>
+        <br />
         <label>
           Odaberi atribut:
           <select
@@ -179,7 +175,10 @@ const DataTable = () => {
             ))}
           </select>
         </label>
+        <br />
         <button onClick={handleSearch}>Pretraži</button>
+        <br />
+        <br />
       </div>
       <table {...getTableProps()} border="1">
         <thead>
@@ -207,11 +206,13 @@ const DataTable = () => {
           })}
         </tbody>
       </table>
+      <div className="buttons">
       {/* Link za preuzimanje JSON-a */}
-      <button onClick={generateJSON}>Preuzmi JSON</button>
+      <button onClick={generateJSON} className="json">Preuzmi JSON</button>
 
       {/* Link za preuzimanje CSV-a */}
-      <button onClick={generateCSV}>Preuzmi CSV</button>
+      <button onClick={generateCSV} className="csv">Preuzmi CSV</button>
+      </div>
     </div>
   );
 };
