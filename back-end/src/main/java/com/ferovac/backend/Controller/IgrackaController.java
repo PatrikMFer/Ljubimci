@@ -1,4 +1,6 @@
-package com.ferovac.backend;
+package com.ferovac.backend.Controller;
+import com.ferovac.backend.Entity.Igracka;
+import com.ferovac.backend.Service.IgrackaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

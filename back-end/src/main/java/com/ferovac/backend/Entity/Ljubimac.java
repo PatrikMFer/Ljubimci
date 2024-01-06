@@ -1,4 +1,4 @@
-package com.ferovac.backend;
+package com.ferovac.backend.Entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

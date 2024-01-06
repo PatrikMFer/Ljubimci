@@ -1,5 +1,7 @@
-package com.ferovac.backend;
+package com.ferovac.backend.Controller;
 
+import com.ferovac.backend.Entity.Ljubimac;
+import com.ferovac.backend.Service.LjubimacService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,5 +1,7 @@
-package com.ferovac.backend;
+package com.ferovac.backend.Service;
 
+import com.ferovac.backend.Entity.Igracka;
+import com.ferovac.backend.Repository.IgrackaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
