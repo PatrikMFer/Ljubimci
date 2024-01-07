@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,12 +40,14 @@ public class LjubimacController {
             ljubimacResponses.add(ljubimacResponse);
         }
 
+        ljubimacResponses.sort(Comparator.comparing(LjubimacResponse::getIdLjubimac));
         return ResponseEntity.ok(ljubimacResponses);
     }
 
     @GetMapping("/ljubimciIVlasniciJSON")
     public ResponseEntity<List<Ljubimac>> getAllLjubimci() {
         List<Ljubimac> ljubimci = ljubimacService.getAllLjubimci();
+        ljubimci.sort(Comparator.comparing(Ljubimac::getId));
         return ResponseEntity.ok(ljubimci);
     }
 
@@ -63,6 +67,7 @@ public class LjubimacController {
 
         List<LjubimacResponse> ljubimacResponses = ljubimci.stream()
                 .map(LjubimacResponse::fromLjubimac)
+                .sorted(Comparator.comparing(LjubimacResponse::getIdLjubimac))
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(ljubimacResponses);
@@ -75,6 +80,7 @@ public class LjubimacController {
 
         List<LjubimacResponse> ljubimacResponses = ljubimci.stream()
                 .map(LjubimacResponse::fromLjubimac)
+                .sorted(Comparator.comparing(LjubimacResponse::getIdLjubimac))
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(ljubimacResponses);
@@ -88,6 +94,7 @@ public class LjubimacController {
 
         List<LjubimacResponse> ljubimacResponses = ljubimci.stream()
                 .map(LjubimacResponse::fromLjubimac)
+                .sorted(Comparator.comparing(LjubimacResponse::getIdLjubimac))
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(ljubimacResponses);

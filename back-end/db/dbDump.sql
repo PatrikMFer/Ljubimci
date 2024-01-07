@@ -1,15 +1,15 @@
 CREATE TABLE Vlasnik
 (
-    idVlasnik SERIAL PRIMARY KEY,
-    imeVlasnik VARCHAR(50) NOT NULL,
-    prezimeVlasnik VARCHAR(50) NOT NULL
+    id SERIAL PRIMARY KEY,
+    ime VARCHAR(50) NOT NULL,
+    prezime VARCHAR(50) NOT NULL
 );
 
 
 CREATE TABLE Ljubimac
 (
-    IdLjubimac SERIAL PRIMARY KEY,
-    imeLjubimac VARCHAR(50) NOT NULL,
+    id SERIAL PRIMARY KEY,
+    ime VARCHAR(50) NOT NULL,
     vrsta VARCHAR(50) NOT NULL,
     spol VARCHAR(25) NOT NULL,
     dob INT NOT NULL,
@@ -17,13 +17,13 @@ CREATE TABLE Ljubimac
     prehrana VARCHAR(25) NOT NULL,
     adresa VARCHAR(50) NOT NULL,
     veterinar VARCHAR(50) NOT NULL,
-    idVlasnik INT NOT NULL,
-    FOREIGN KEY (idVlasnik) REFERENCES Vlasnik(idVlasnik),
-    UNIQUE (idVlasnik)
+    id_vlasnik INT NOT NULL,
+    FOREIGN KEY (id_vlasnik) REFERENCES Vlasnik(id),
+    UNIQUE (id_vlasnik)
 );
 
 
-INSERT INTO vlasnik (imeVlasnik, prezimeVlasnik)
+INSERT INTO vlasnik (ime, prezime)
 VALUES
     ('Marko', 'Horvat'),
     ('Ana', 'Marić'),
@@ -37,7 +37,7 @@ VALUES
     ('Luka', 'Horvat');
 
 
-INSERT INTO ljubimac (imeLjubimac, vrsta, spol, dob, boja, prehrana, adresa, veterinar, idvlasnik)
+INSERT INTO ljubimac (ime, vrsta, spol, dob, boja, prehrana, adresa, veterinar, id_vlasnik)
 VALUES
     ('Buddy', 'pas', 'muški', 3, 'smeđa', 'mesožder', 'Zagreb', 'Dr. Ana Kovač', 1),
     ('Whiskers', 'mačka', 'ženski', 2, 'siva', 'mesožder', 'Split', 'Dr. Ivan Petrović', 2),

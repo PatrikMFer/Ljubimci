@@ -12,21 +12,43 @@
 
 #GET http://localhost:8080/api/ljubimci/vrsta/pas
 
+
+
 #POST http://localhost:8080/api/ljubimci
 #Content-Type: application/json
-# {
-#    "imeLjubimac": "Shelly",
-#    "vrsta": "kornjača",
-#    "spol": "neuter",
-#    "dob": 5,
-#    "boja": "zelena",
-#    "prehrana": "biljožder",
-#    "adresa": "Zadar",
-#    "veterinar": "Dr. Petra Kovač",
-#    "imeVlasnika": "Luka",
+#
+#{
+#    "imeLjubimac": "Lolipop",
+#    "vrsta": "orao",
+#    "spol": "muški",
+#    "dob": 2,
+#    "boja": "smeđa",
+#    "prehrana": "mesožder",
+#    "adresa": "Sumag",
+#    "veterinar": "Dr. Janko Jelačić",
+#    "imeVlasnika": "Marko",
+#    "prezimeVlasnika": "Markičević"
+#}
+
+#PUT http://localhost:8080/api/ljubimci/11
+#Content-Type: application/json
+#
+#{
+#    "imeLjubimac": "Lasdf",
+#    "vrsta": "pas",
+#    "spol": "muški",
+#    "dob": 14,
+#    "boja": "smeđa",
+#    "prehrana": "mesožder",
+#    "adresa": "Zagreb",
+#    "veterinar": "Dr. Ana Kovač",
+#    "imeVlasnika": "Marko",
 #    "prezimeVlasnika": "Horvat"
-# }
+#}
 
-#PUT http://localhost:8080/api/ljubimci/1
 
-#DELETE http://localhost:8080/api/ljubimci/10
+
+
+#DELETE http://localhost:8080/api/ljubimci/11
+
+#GET http://localhost:8080/api/vlasnici

@@ -59,6 +59,9 @@ public class LjubimacService {
         Vlasnik vlasnik = vlasnikRepository.findById(ljubimac.getVlasnik().getId())
                 .orElseThrow(() -> new EntityNotFoundException("Vlasnik ljubimca nije pronađen."));
 
+        vlasnik.setIme(ljubimacRequest.getImeVlasnika());
+        vlasnik.setPrezime(ljubimacRequest.getPrezimeVlasnika());
+
         ljubimac.setIme(ljubimacRequest.getImeLjubimac());
         ljubimac.setVrsta(ljubimacRequest.getVrsta());
         ljubimac.setSpol(ljubimacRequest.getSpol());
@@ -68,21 +71,19 @@ public class LjubimacService {
         ljubimac.setAdresa(ljubimacRequest.getAdresa());
         ljubimac.setVeterinar(ljubimacRequest.getVeterinar());
 
-        vlasnik.setIme(ljubimacRequest.getImeVlasnika());
-        vlasnik.setPrezime(ljubimacRequest.getPrezimeVlasnika());
+        vlasnikRepository.flush();
+        ljubimacRepository.flush();
 
-        ljubimacRepository.save(ljubimac);
-        vlasnikRepository.save(vlasnik);
 
         return ljubimac;
     }
 
-    public void deleteLjubimac(Long idLjubimac) {
-        Ljubimac ljubimac = getLjubimacById(idLjubimac);
+    public void deleteLjubimac(Long id) {
+        Ljubimac ljubimac = getLjubimacById(id);
+
+        ljubimacRepository.deleteById(id);
 
         vlasnikService.deleteVlasnik(ljubimac.getVlasnik().getId());
-
-        ljubimacRepository.deleteById(idLjubimac);
     }
 
 
