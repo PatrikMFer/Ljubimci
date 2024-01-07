@@ -1,6 +1,7 @@
 package com.ferovac.backend.Service;
 
 import com.ferovac.backend.Entity.Vlasnik;
+import com.ferovac.backend.Exception.ElementCreationException;
 import com.ferovac.backend.Repository.VlasnikRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,9 +28,12 @@ public class VlasnikService {
     }
 
     public Vlasnik createVlasnik(Vlasnik vlasnik) {
-        return vlasnikRepository.save(vlasnik);
+        try {
+            return vlasnikRepository.save(vlasnik);
+        } catch (Exception ex) {
+            throw new ElementCreationException("Nije moguće kreirati vlasnika");
+        }
     }
-
     public void deleteVlasnik(Long vlasnikId) {
         vlasnikRepository.deleteById(vlasnikId);
     }

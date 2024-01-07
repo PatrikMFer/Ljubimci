@@ -2,6 +2,7 @@ package com.ferovac.backend.Service;
 
 import com.ferovac.backend.Entity.Ljubimac;
 import com.ferovac.backend.Entity.Vlasnik;
+import com.ferovac.backend.Exception.ElementCreationException;
 import com.ferovac.backend.Repository.LjubimacRepository;
 import com.ferovac.backend.Repository.VlasnikRepository;
 import com.ferovac.backend.dto.LjubimacRequest;
@@ -47,17 +48,22 @@ public class LjubimacService {
     }
 
     public Ljubimac createLjubimac(Ljubimac ljubimac, Vlasnik vlasnik) {
-        ljubimac.setVlasnik(vlasnik);
-        return ljubimacRepository.save(ljubimac);
+        try {
+            ljubimac.setVlasnik(vlasnik);
+            return ljubimacRepository.save(ljubimac);
+        } catch (Exception ex) {
+            throw new ElementCreationException("Nije moguće kreirati ljubimca");
+        }
     }
+
 
 
     public Ljubimac updateLjubimac(Long id, LjubimacRequest ljubimacRequest) {
         Ljubimac ljubimac = ljubimacRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Ljubimac s ID-om " + id + " nije pronađen."));
+                .orElseThrow(() -> new EntityNotFoundException("Ljubimac s ID-om " + id + " nije pronađen"));
 
         Vlasnik vlasnik = vlasnikRepository.findById(ljubimac.getVlasnik().getId())
-                .orElseThrow(() -> new EntityNotFoundException("Vlasnik ljubimca nije pronađen."));
+                .orElseThrow(() -> new EntityNotFoundException("Vlasnik ljubimca nije pronađen"));
 
         vlasnik.setIme(ljubimacRequest.getImeVlasnika());
         vlasnik.setPrezime(ljubimacRequest.getPrezimeVlasnika());
@@ -78,12 +84,19 @@ public class LjubimacService {
         return ljubimac;
     }
 
-    public void deleteLjubimac(Long id) {
+
+    public boolean deleteLjubimac(Long id) {
         Ljubimac ljubimac = getLjubimacById(id);
+
+        if (ljubimac == null) {
+            return false;
+        }
 
         ljubimacRepository.deleteById(id);
 
         vlasnikService.deleteVlasnik(ljubimac.getVlasnik().getId());
+
+        return true;
     }
 
 
