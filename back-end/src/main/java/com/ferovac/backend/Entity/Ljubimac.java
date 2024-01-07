@@ -1,31 +1,48 @@
 package com.ferovac.backend.Entity;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
-@Table(name = "ljubimac")
+@Table(name = "Ljubimac")
 public class Ljubimac {
+
     @Id
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+
+    @Column(name = "ime", nullable = false, length = 50)
     private String ime;
+
+    @Column(name = "vrsta", nullable = false, length = 50)
     private String vrsta;
+
+    @Column(name = "spol", nullable = false, length = 25)
     private String spol;
-    private Integer starost;
-    @Column(name = "zivotnivijek")
-    private Integer zivotniVijek;
+
+    @Column(name = "dob", nullable = false)
+    private int dob;
+
+    @Column(name = "boja", nullable = false, length = 50)
     private String boja;
-    @Column(name = "imevlasnika")
-    private String imeVlasnika;
+
+    @Column(name = "prehrana", nullable = false, length = 25)
     private String prehrana;
 
-    public Integer getId() {
+    @Column(name = "adresa", nullable = false, length = 50)
+    private String adresa;
+
+    @Column(name = "veterinar", nullable = false, length = 50)
+    private String veterinar;
+
+    @ManyToOne
+    @JoinColumn(name = "id_vlasnik", nullable = false)
+    private Vlasnik vlasnik;
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -53,20 +70,12 @@ public class Ljubimac {
         this.spol = spol;
     }
 
-    public Integer getStarost() {
-        return starost;
+    public int getDob() {
+        return dob;
     }
 
-    public void setStarost(Integer starost) {
-        this.starost = starost;
-    }
-
-    public Integer getZivotniVijek() {
-        return zivotniVijek;
-    }
-
-    public void setZivotniVijek(Integer zivotniVijek) {
-        this.zivotniVijek = zivotniVijek;
+    public void setDob(int dob) {
+        this.dob = dob;
     }
 
     public String getBoja() {
@@ -77,19 +86,35 @@ public class Ljubimac {
         this.boja = boja;
     }
 
-    public String getImeVlasnika() {
-        return imeVlasnika;
-    }
-
-    public void setImeVlasnika(String imeVlasnika) {
-        this.imeVlasnika = imeVlasnika;
-    }
-
     public String getPrehrana() {
         return prehrana;
     }
 
     public void setPrehrana(String prehrana) {
         this.prehrana = prehrana;
+    }
+
+    public String getAdresa() {
+        return adresa;
+    }
+
+    public void setAdresa(String adresa) {
+        this.adresa = adresa;
+    }
+
+    public String getVeterinar() {
+        return veterinar;
+    }
+
+    public void setVeterinar(String veterinar) {
+        this.veterinar = veterinar;
+    }
+
+    public Vlasnik getVlasnik() {
+        return vlasnik;
+    }
+
+    public void setVlasnik(Vlasnik vlasnik) {
+        this.vlasnik = vlasnik;
     }
 }

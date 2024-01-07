@@ -12,7 +12,7 @@ const DataTable = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/igracke");
+        const response = await fetch("http://localhost:8080/api/ljubimci");
         const result = await response.json();
         setData(result);
       } catch (error) {

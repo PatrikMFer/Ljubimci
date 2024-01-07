@@ -1,8 +1,8 @@
 import "./App.css";
-import DataTable from "./LjubimciDataTable";
+import LjubimciDataTable from "./LjubimciDataTable";
 
 function App() {
-  return <DataTable />;
+  return <LjubimciDataTable />;
 }
 
 export default App;
