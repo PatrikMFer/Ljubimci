@@ -33,7 +33,12 @@ public class LjubimacService {
                 .orElseThrow(() -> new EntityNotFoundException("Ljubimac s ID-om " + id + " nije pronađen."));
     }
 
-    public Ljubimac getLjubimacByIme(String ime) {
+
+    public List<Ljubimac> getLjubimciByAdresa(String adresa) {
+        return ljubimacRepository.findByAdresa(adresa);
+    }
+
+    public List<Ljubimac> getLjubimciByIme(String ime) {
         return ljubimacRepository.findByIme(ime);
     }
 

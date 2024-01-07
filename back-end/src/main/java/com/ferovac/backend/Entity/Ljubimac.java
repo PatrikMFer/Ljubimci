@@ -34,7 +34,7 @@ public class Ljubimac {
     @Column(name = "veterinar", nullable = false, length = 50)
     private String veterinar;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_vlasnik", nullable = false)
     private Vlasnik vlasnik;
 

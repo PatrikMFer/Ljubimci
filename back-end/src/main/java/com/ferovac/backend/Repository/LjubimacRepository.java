@@ -8,7 +8,10 @@ import java.util.List;
 
 public interface LjubimacRepository extends JpaRepository<Ljubimac, Long> {
 
-    List<Ljubimac> findByVrsta(String vrsta);
 
-    Ljubimac findByIme(String ime);
+    List<Ljubimac> findByAdresa(String adresa);
+
+    List<Ljubimac> findByIme(String ime);
+
+    List<Ljubimac> findByVrsta(String vrsta);
 }

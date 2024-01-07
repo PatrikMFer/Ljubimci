@@ -41,39 +41,50 @@ public class LjubimacController {
         return ResponseEntity.ok(ljubimacResponses);
     }
 
-
-    //  Get za dohvacanje pojedinačnog resursa iz kolekcije
-    @GetMapping("/{id}")
-    public ResponseEntity<LjubimacResponse> getLjubimacById(@PathVariable Long id) {
-        Ljubimac ljubimac = ljubimacService.getLjubimacById(id);
-        LjubimacResponse ljubimacResponse = LjubimacResponse.fromLjubimac(ljubimac);
-        return ResponseEntity.ok(ljubimacResponse);
-    }
-
-    //  1. Get po vlastitom izboru dohvaca sve ljubimce
-    @GetMapping
+    @GetMapping("/ljubimciIVlasniciJSON")
     public ResponseEntity<List<Ljubimac>> getAllLjubimci() {
         List<Ljubimac> ljubimci = ljubimacService.getAllLjubimci();
         return ResponseEntity.ok(ljubimci);
     }
 
-    //  2. Get po vlastitom izboru dohvaca sve ljubimce po imenu
-    @GetMapping("/ime/{imeLjubimac}")
-    public ResponseEntity<LjubimacResponse> getLjubimacByIme(@PathVariable String ime) {
-        Ljubimac ljubimac = ljubimacService.getLjubimacByIme(ime);
 
-        if (ljubimac != null) {
-            LjubimacResponse response = LjubimacResponse.fromLjubimac(ljubimac);
-            return ResponseEntity.ok(response);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    //  Get za dohvacanje pojedinačnog resursa iz kolekcije
+    @GetMapping("/id/{idLjubimca}")
+    public ResponseEntity<LjubimacResponse> getLjubimacById(@PathVariable Long idLjubimca) {
+        Ljubimac ljubimac = ljubimacService.getLjubimacById(idLjubimca);
+        LjubimacResponse ljubimacResponse = LjubimacResponse.fromLjubimac(ljubimac);
+        return ResponseEntity.ok(ljubimacResponse);
     }
 
+    //  1. Get po vlastitom izboru dohvaca sve ljubimce po adresi
+    @GetMapping("/adresa/{adresaLjubimca}")
+    public ResponseEntity<List<LjubimacResponse>> getLjubimciByAdresa(@PathVariable String adresaLjubimca) {
+        List<Ljubimac> ljubimci = ljubimacService.getLjubimciByAdresa(adresaLjubimca);
+
+        List<LjubimacResponse> ljubimacResponses = ljubimci.stream()
+                .map(LjubimacResponse::fromLjubimac)
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(ljubimacResponses);
+    }
+
+    //  2. Get po vlastitom izboru dohvaca sve ljubimce po imenu
+    @GetMapping("/ime/{imeLjubimca}")
+    public ResponseEntity<List<LjubimacResponse>> getLjubimciByIme(@PathVariable String imeLjubimca) {
+        List<Ljubimac> ljubimci = ljubimacService.getLjubimciByIme(imeLjubimca);
+
+        List<LjubimacResponse> ljubimacResponses = ljubimci.stream()
+                .map(LjubimacResponse::fromLjubimac)
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(ljubimacResponses);
+    }
+
+
     //  3. Get po vlastitom izboru dohvaca sve ljubimce po vrsti
-    @GetMapping("/vrsta/{vrsta}")
-    public ResponseEntity<List<LjubimacResponse>> getLjubimciByVrsta(@PathVariable String vrsta) {
-        List<Ljubimac> ljubimci = ljubimacService.getLjubimciByVrsta(vrsta);
+    @GetMapping("/vrsta/{vrstaLjubimca}")
+    public ResponseEntity<List<LjubimacResponse>> getLjubimciByVrsta(@PathVariable String vrstaLjubimca) {
+        List<Ljubimac> ljubimci = ljubimacService.getLjubimciByVrsta(vrstaLjubimca);
 
         List<LjubimacResponse> ljubimacResponses = ljubimci.stream()
                 .map(LjubimacResponse::fromLjubimac)
