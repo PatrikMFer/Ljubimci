@@ -155,7 +155,7 @@ public class LjubimacController {
         return ResponseEntity.ok(apiResponseWrapper);
     }
 
-
+    //Get za dohvacanje openapi.json
     @GetMapping("/openapi.json")
     public ResponseEntity<String> getOpenApiSpec() {
         try {
