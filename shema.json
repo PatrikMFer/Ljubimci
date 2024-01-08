@@ -1,1080 +1,484 @@
 {
-    "$schema": "https://json-schema.org/draft/2019-09/schema",
-    "$id": "http://example.com/example.json",
-    "type": "array",
-    "default": [],
-    "title": "Root Schema",
-    "items": {
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "$id": "http://example.com/example.json",
+  "type": "array",
+  "default": [],
+  "title": "Ljubimci",
+  "description": "Skup ljubimaca",
+  "items": {
+    "type": "object",
+    "title": "Ljubimac",
+    "required": [
+      "id",
+      "ime",
+      "vrsta",
+      "spol",
+      "dob",
+      "boja",
+      "prehrana",
+      "adresa",
+      "veterinar",
+      "vlasnik"
+    ],
+    "properties": {
+      "id": {
+        "type": "integer",
+        "title": "id",
+        "examples": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+      },
+      "ime": {
+        "type": "string",
+        "title": "ime",
+        "examples": [
+          "Buddy",
+          "Whiskers",
+          "Rocky",
+          "Mittens",
+          "Fluffy",
+          "Lola",
+          "Oliver",
+          "Oreo",
+          "Polly",
+          "Shelly"
+        ]
+      },
+      "vrsta": {
+        "type": "string",
+        "title": "vrsta",
+        "examples": ["pas", "mačka", "hrčak", "papiga", "kornjača"]
+      },
+      "spol": {
+        "type": "string",
+        "title": "spol",
+        "examples": ["mužjak", "ženka"]
+      },
+      "dob": {
+        "type": "integer",
+        "title": "dob",
+        "examples": [3, 2, 4, 1, 0, 5]
+      },
+      "boja": {
+        "type": "string",
+        "title": "boja",
+        "examples": [
+          "smeđa",
+          "siva",
+          "crna i smeđa",
+          "bijela",
+          "smeđi",
+          "crna",
+          "narandžasta",
+          "crno-bijeli",
+          "šareno",
+          "zelena"
+        ]
+      },
+      "prehrana": {
+        "type": "string",
+        "title": "prehrana",
+        "examples": ["mesožder", "biljožder"]
+      },
+      "adresa": {
+        "type": "string",
+        "title": "adresa",
+        "examples": [
+          "Zagreb",
+          "Split",
+          "Rijeka",
+          "Osijek",
+          "Zadar",
+          "Pula",
+          "Varaždin",
+          "Karlovac"
+        ]
+      },
+      "veterinar": {
+        "type": "string",
+        "title": "veterinar",
+        "examples": [
+          "Dr. Ana Kovač",
+          "Dr. Ivan Petrović",
+          "Dr. Marta Tomić",
+          "Dr. Maja Horvat",
+          "Dr. Petra Kovač",
+          "Dr. Luka Novak",
+          "Dr. Marija Kovač",
+          "Dr. Ivan Barić"
+        ]
+      },
+      "vlasnik": {
         "type": "object",
-        "title": "A Schema",
-        "required": [
-            "id",
-            "naziv",
-            "boja",
-            "ljubimac"
-        ],
+        "title": "vlasnik",
+        "required": ["ime", "prezime"],
         "properties": {
-            "id": {
-                "type": "integer",
-                "title": "The id Schema",
-                "examples": [
-                    2,
-                    3,
-                    4,
-                    5,
-                    6,
-                    7,
-                    8,
-                    9,
-                    10,
-                    11,
-                    12,
-                    13,
-                    14,
-                    15,
-                    16,
-                    17,
-                    18,
-                    19,
-                    20,
-                    1
-                ]
-            },
-            "naziv": {
-                "type": "string",
-                "title": "The naziv Schema",
-                "examples": [
-                    "Uže",
-                    "Tobogan",
-                    "Zvonce",
-                    "Plišanac",
-                    "Kuglice",
-                    "Štapići",
-                    "Kolotur",
-                    "Lopta",
-                    "Frizbi",
-                    "Kamen",
-                    "Brodić",
-                    "Miš",
-                    "Konop",
-                    "Alge",
-                    "Ljuljačka"
-                ]
-            },
-            "boja": {
-                "type": "string",
-                "title": "The boja Schema",
-                "examples": [
-                    "Plava",
-                    "Žuta",
-                    "Roza",
-                    "Smeđa",
-                    "Zelena",
-                    "Crvena",
-                    "Siva",
-                    "Zlatna"
-                ]
-            },
-            "ljubimac": {
-                "type": "object",
-                "title": "The ljubimac Schema",
-                "required": [
-                    "id",
-                    "ime",
-                    "vrsta",
-                    "spol",
-                    "starost",
-                    "zivotniVijek",
-                    "boja",
-                    "imeVlasnika",
-                    "prehrana"
-                ],
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "title": "The id Schema",
-                        "examples": [
-                            1,
-                            2,
-                            3,
-                            4,
-                            5,
-                            6,
-                            7,
-                            8,
-                            9,
-                            10
-                        ]
-                    },
-                    "ime": {
-                        "type": "string",
-                        "title": "The ime Schema",
-                        "examples": [
-                            "Kira",
-                            "Korni",
-                            "Micika",
-                            "Anđa",
-                            "Gricko",
-                            "Rex",
-                            "Rafaelo",
-                            "Leo",
-                            "Šara",
-                            "Koko"
-                        ]
-                    },
-                    "vrsta": {
-                        "type": "string",
-                        "title": "The vrsta Schema",
-                        "examples": [
-                            "Pas",
-                            "Kornjača",
-                            "Mačka",
-                            "Riba",
-                            "Hrčak",
-                            "Kakadu"
-                        ]
-                    },
-                    "spol": {
-                        "type": "string",
-                        "title": "The spol Schema",
-                        "examples": [
-                            "Ženka",
-                            "Mužjak"
-                        ]
-                    },
-                    "starost": {
-                        "type": "integer",
-                        "title": "The starost Schema",
-                        "examples": [
-                            3,
-                            6,
-                            2,
-                            1,
-                            4,
-                            7,
-                            5,
-                            10
-                        ]
-                    },
-                    "zivotniVijek": {
-                        "type": "integer",
-                        "title": "The zivotniVijek Schema",
-                        "examples": [
-                            11,
-                            30,
-                            17,
-                            13,
-                            3,
-                            12,
-                            40,
-                            15,
-                            10,
-                            50
-                        ]
-                    },
-                    "boja": {
-                        "type": "string",
-                        "title": "The boja Schema",
-                        "examples": [
-                            "Žuta",
-                            "Zelena",
-                            "Bijela",
-                            "Narančasta",
-                            "Smeđa",
-                            "Crna",
-                            "Siva",
-                            "Zlatna"
-                        ]
-                    },
-                    "imeVlasnika": {
-                        "type": "string",
-                        "title": "The imeVlasnika Schema",
-                        "examples": [
-                            "Ivan",
-                            "Fran",
-                            "Tomislav",
-                            "Ivona",
-                            "Lora",
-                            "Marija",
-                            "Marko",
-                            "Ana",
-                            "David",
-                            "Tamara"
-                        ]
-                    },
-                    "prehrana": {
-                        "type": "string",
-                        "title": "The prehrana Schema",
-                        "examples": [
-                            "Mesožder",
-                            "Svežder",
-                            "Biljožder"
-                        ]
-                    }
-                },
-                "examples": [{
-                    "id": 1,
-                    "ime": "Kira",
-                    "vrsta": "Pas",
-                    "spol": "Ženka",
-                    "starost": 3,
-                    "zivotniVijek": 11,
-                    "boja": "Žuta",
-                    "imeVlasnika": "Ivan",
-                    "prehrana": "Mesožder"
-                },
-                {
-                    "id": 2,
-                    "ime": "Korni",
-                    "vrsta": "Kornjača",
-                    "spol": "Ženka",
-                    "starost": 6,
-                    "zivotniVijek": 30,
-                    "boja": "Zelena",
-                    "imeVlasnika": "Fran",
-                    "prehrana": "Svežder"
-                },
-                {
-                    "id": 2,
-                    "ime": "Korni",
-                    "vrsta": "Kornjača",
-                    "spol": "Ženka",
-                    "starost": 6,
-                    "zivotniVijek": 30,
-                    "boja": "Zelena",
-                    "imeVlasnika": "Fran",
-                    "prehrana": "Svežder"
-                },
-                {
-                    "id": 3,
-                    "ime": "Micika",
-                    "vrsta": "Mačka",
-                    "spol": "Ženka",
-                    "starost": 2,
-                    "zivotniVijek": 17,
-                    "boja": "Bijela",
-                    "imeVlasnika": "Tomislav",
-                    "prehrana": "Mesožder"
-                },
-                {
-                    "id": 3,
-                    "ime": "Micika",
-                    "vrsta": "Mačka",
-                    "spol": "Ženka",
-                    "starost": 2,
-                    "zivotniVijek": 17,
-                    "boja": "Bijela",
-                    "imeVlasnika": "Tomislav",
-                    "prehrana": "Mesožder"
-                },
-                {
-                    "id": 4,
-                    "ime": "Anđa",
-                    "vrsta": "Riba",
-                    "spol": "Ženka",
-                    "starost": 3,
-                    "zivotniVijek": 13,
-                    "boja": "Narančasta",
-                    "imeVlasnika": "Ivona",
-                    "prehrana": "Biljožder"
-                },
-                {
-                    "id": 4,
-                    "ime": "Anđa",
-                    "vrsta": "Riba",
-                    "spol": "Ženka",
-                    "starost": 3,
-                    "zivotniVijek": 13,
-                    "boja": "Narančasta",
-                    "imeVlasnika": "Ivona",
-                    "prehrana": "Biljožder"
-                },
-                {
-                    "id": 5,
-                    "ime": "Gricko",
-                    "vrsta": "Hrčak",
-                    "spol": "Mužjak",
-                    "starost": 1,
-                    "zivotniVijek": 3,
-                    "boja": "Smeđa",
-                    "imeVlasnika": "Lora",
-                    "prehrana": "Mesožder"
-                },
-                {
-                    "id": 5,
-                    "ime": "Gricko",
-                    "vrsta": "Hrčak",
-                    "spol": "Mužjak",
-                    "starost": 1,
-                    "zivotniVijek": 3,
-                    "boja": "Smeđa",
-                    "imeVlasnika": "Lora",
-                    "prehrana": "Mesožder"
-                },
-                {
-                    "id": 6,
-                    "ime": "Rex",
-                    "vrsta": "Pas",
-                    "spol": "Mužjak",
-                    "starost": 4,
-                    "zivotniVijek": 12,
-                    "boja": "Crna",
-                    "imeVlasnika": "Marija",
-                    "prehrana": "Mesožder"
-                },
-                {
-                    "id": 6,
-                    "ime": "Rex",
-                    "vrsta": "Pas",
-                    "spol": "Mužjak",
-                    "starost": 4,
-                    "zivotniVijek": 12,
-                    "boja": "Crna",
-                    "imeVlasnika": "Marija",
-                    "prehrana": "Mesožder"
-                },
-                {
-                    "id": 7,
-                    "ime": "Rafaelo",
-                    "vrsta": "Kornjača",
-                    "spol": "Ženka",
-                    "starost": 7,
-                    "zivotniVijek": 40,
-                    "boja": "Zelena",
-                    "imeVlasnika": "Marko",
-                    "prehrana": "Svežder"
-                },
-                {
-                    "id": 7,
-                    "ime": "Rafaelo",
-                    "vrsta": "Kornjača",
-                    "spol": "Ženka",
-                    "starost": 7,
-                    "zivotniVijek": 40,
-                    "boja": "Zelena",
-                    "imeVlasnika": "Marko",
-                    "prehrana": "Svežder"
-                },
-                {
-                    "id": 8,
-                    "ime": "Leo",
-                    "vrsta": "Mačka",
-                    "spol": "Mužjak",
-                    "starost": 5,
-                    "zivotniVijek": 15,
-                    "boja": "Siva",
-                    "imeVlasnika": "Ana",
-                    "prehrana": "Mesožder"
-                },
-                {
-                    "id": 8,
-                    "ime": "Leo",
-                    "vrsta": "Mačka",
-                    "spol": "Mužjak",
-                    "starost": 5,
-                    "zivotniVijek": 15,
-                    "boja": "Siva",
-                    "imeVlasnika": "Ana",
-                    "prehrana": "Mesožder"
-                },
-                {
-                    "id": 9,
-                    "ime": "Šara",
-                    "vrsta": "Riba",
-                    "spol": "Ženka",
-                    "starost": 2,
-                    "zivotniVijek": 10,
-                    "boja": "Zlatna",
-                    "imeVlasnika": "David",
-                    "prehrana": "Biljožder"
-                },
-                {
-                    "id": 9,
-                    "ime": "Šara",
-                    "vrsta": "Riba",
-                    "spol": "Ženka",
-                    "starost": 2,
-                    "zivotniVijek": 10,
-                    "boja": "Zlatna",
-                    "imeVlasnika": "David",
-                    "prehrana": "Biljožder"
-                },
-                {
-                    "id": 10,
-                    "ime": "Koko",
-                    "vrsta": "Kakadu",
-                    "spol": "Mužjak",
-                    "starost": 10,
-                    "zivotniVijek": 50,
-                    "boja": "Bijela",
-                    "imeVlasnika": "Tamara",
-                    "prehrana": "Biljožder"
-                },
-                {
-                    "id": 10,
-                    "ime": "Koko",
-                    "vrsta": "Kakadu",
-                    "spol": "Mužjak",
-                    "starost": 10,
-                    "zivotniVijek": 50,
-                    "boja": "Bijela",
-                    "imeVlasnika": "Tamara",
-                    "prehrana": "Biljožder"
-                },
-                {
-                    "id": 1,
-                    "ime": "Kira",
-                    "vrsta": "Pas",
-                    "spol": "Ženka",
-                    "starost": 3,
-                    "zivotniVijek": 11,
-                    "boja": "Žuta",
-                    "imeVlasnika": "Ivan",
-                    "prehrana": "Mesožder"
-                }]
-            }
+          "ime": {
+            "type": "string",
+            "title": "ime",
+            "examples": ["Marko", "Ana", "Petra", "Ivan", "Ivana", "Luka"]
+          },
+          "prezime": {
+            "type": "string",
+            "title": "prezime",
+            "examples": [
+              "Horvat",
+              "Marić",
+              "Novak",
+              "Kovačić",
+              "Barić",
+              "Vuković",
+              "Kovač"
+            ]
+          }
         },
-        "examples": [{
-            "id": 2,
-            "naziv": "Uže",
-            "boja": "Plava",
-            "ljubimac": {
-                "id": 1,
-                "ime": "Kira",
-                "vrsta": "Pas",
-                "spol": "Ženka",
-                "starost": 3,
-                "zivotniVijek": 11,
-                "boja": "Žuta",
-                "imeVlasnika": "Ivan",
-                "prehrana": "Mesožder"
-            }
-        },
-        {
-            "id": 3,
-            "naziv": "Tobogan",
-            "boja": "Žuta",
-            "ljubimac": {
-                "id": 2,
-                "ime": "Korni",
-                "vrsta": "Kornjača",
-                "spol": "Ženka",
-                "starost": 6,
-                "zivotniVijek": 30,
-                "boja": "Zelena",
-                "imeVlasnika": "Fran",
-                "prehrana": "Svežder"
-            }
-        },
-        {
-            "id": 4,
-            "naziv": "Tobogan",
-            "boja": "Plava",
-            "ljubimac": {
-                "id": 2,
-                "ime": "Korni",
-                "vrsta": "Kornjača",
-                "spol": "Ženka",
-                "starost": 6,
-                "zivotniVijek": 30,
-                "boja": "Zelena",
-                "imeVlasnika": "Fran",
-                "prehrana": "Svežder"
-            }
-        },
-        {
-            "id": 5,
-            "naziv": "Zvonce",
-            "boja": "Roza",
-            "ljubimac": {
-                "id": 3,
-                "ime": "Micika",
-                "vrsta": "Mačka",
-                "spol": "Ženka",
-                "starost": 2,
-                "zivotniVijek": 17,
-                "boja": "Bijela",
-                "imeVlasnika": "Tomislav",
-                "prehrana": "Mesožder"
-            }
-        },
-        {
-            "id": 6,
-            "naziv": "Plišanac",
-            "boja": "Smeđa",
-            "ljubimac": {
-                "id": 3,
-                "ime": "Micika",
-                "vrsta": "Mačka",
-                "spol": "Ženka",
-                "starost": 2,
-                "zivotniVijek": 17,
-                "boja": "Bijela",
-                "imeVlasnika": "Tomislav",
-                "prehrana": "Mesožder"
-            }
-        },
-        {
-            "id": 7,
-            "naziv": "Kuglice",
-            "boja": "Zelena",
-            "ljubimac": {
-                "id": 4,
-                "ime": "Anđa",
-                "vrsta": "Riba",
-                "spol": "Ženka",
-                "starost": 3,
-                "zivotniVijek": 13,
-                "boja": "Narančasta",
-                "imeVlasnika": "Ivona",
-                "prehrana": "Biljožder"
-            }
-        },
-        {
-            "id": 8,
-            "naziv": "Štapići",
-            "boja": "Crvena",
-            "ljubimac": {
-                "id": 4,
-                "ime": "Anđa",
-                "vrsta": "Riba",
-                "spol": "Ženka",
-                "starost": 3,
-                "zivotniVijek": 13,
-                "boja": "Narančasta",
-                "imeVlasnika": "Ivona",
-                "prehrana": "Biljožder"
-            }
-        },
-        {
-            "id": 9,
-            "naziv": "Kolotur",
-            "boja": "Plava",
-            "ljubimac": {
-                "id": 5,
-                "ime": "Gricko",
-                "vrsta": "Hrčak",
-                "spol": "Mužjak",
-                "starost": 1,
-                "zivotniVijek": 3,
-                "boja": "Smeđa",
-                "imeVlasnika": "Lora",
-                "prehrana": "Mesožder"
-            }
-        },
-        {
-            "id": 10,
-            "naziv": "Tobogan",
-            "boja": "Zelena",
-            "ljubimac": {
-                "id": 5,
-                "ime": "Gricko",
-                "vrsta": "Hrčak",
-                "spol": "Mužjak",
-                "starost": 1,
-                "zivotniVijek": 3,
-                "boja": "Smeđa",
-                "imeVlasnika": "Lora",
-                "prehrana": "Mesožder"
-            }
-        },
-        {
-            "id": 11,
-            "naziv": "Lopta",
-            "boja": "Žuta",
-            "ljubimac": {
-                "id": 6,
-                "ime": "Rex",
-                "vrsta": "Pas",
-                "spol": "Mužjak",
-                "starost": 4,
-                "zivotniVijek": 12,
-                "boja": "Crna",
-                "imeVlasnika": "Marija",
-                "prehrana": "Mesožder"
-            }
-        },
-        {
-            "id": 12,
-            "naziv": "Frizbi",
-            "boja": "Plava",
-            "ljubimac": {
-                "id": 6,
-                "ime": "Rex",
-                "vrsta": "Pas",
-                "spol": "Mužjak",
-                "starost": 4,
-                "zivotniVijek": 12,
-                "boja": "Crna",
-                "imeVlasnika": "Marija",
-                "prehrana": "Mesožder"
-            }
-        },
-        {
-            "id": 13,
-            "naziv": "Kamen",
-            "boja": "Siva",
-            "ljubimac": {
-                "id": 7,
-                "ime": "Rafaelo",
-                "vrsta": "Kornjača",
-                "spol": "Ženka",
-                "starost": 7,
-                "zivotniVijek": 40,
-                "boja": "Zelena",
-                "imeVlasnika": "Marko",
-                "prehrana": "Svežder"
-            }
-        },
-        {
-            "id": 14,
-            "naziv": "Brodić",
-            "boja": "Smeđa",
-            "ljubimac": {
-                "id": 7,
-                "ime": "Rafaelo",
-                "vrsta": "Kornjača",
-                "spol": "Ženka",
-                "starost": 7,
-                "zivotniVijek": 40,
-                "boja": "Zelena",
-                "imeVlasnika": "Marko",
-                "prehrana": "Svežder"
-            }
-        },
-        {
-            "id": 15,
-            "naziv": "Miš",
-            "boja": "Smeđa",
-            "ljubimac": {
-                "id": 8,
-                "ime": "Leo",
-                "vrsta": "Mačka",
-                "spol": "Mužjak",
-                "starost": 5,
-                "zivotniVijek": 15,
-                "boja": "Siva",
-                "imeVlasnika": "Ana",
-                "prehrana": "Mesožder"
-            }
-        },
-        {
-            "id": 16,
-            "naziv": "Konop",
-            "boja": "Zelena",
-            "ljubimac": {
-                "id": 8,
-                "ime": "Leo",
-                "vrsta": "Mačka",
-                "spol": "Mužjak",
-                "starost": 5,
-                "zivotniVijek": 15,
-                "boja": "Siva",
-                "imeVlasnika": "Ana",
-                "prehrana": "Mesožder"
-            }
-        },
-        {
-            "id": 17,
-            "naziv": "Alge",
-            "boja": "Zelena",
-            "ljubimac": {
-                "id": 9,
-                "ime": "Šara",
-                "vrsta": "Riba",
-                "spol": "Ženka",
-                "starost": 2,
-                "zivotniVijek": 10,
-                "boja": "Zlatna",
-                "imeVlasnika": "David",
-                "prehrana": "Biljožder"
-            }
-        },
-        {
-            "id": 18,
-            "naziv": "Kamen",
-            "boja": "Siva",
-            "ljubimac": {
-                "id": 9,
-                "ime": "Šara",
-                "vrsta": "Riba",
-                "spol": "Ženka",
-                "starost": 2,
-                "zivotniVijek": 10,
-                "boja": "Zlatna",
-                "imeVlasnika": "David",
-                "prehrana": "Biljožder"
-            }
-        },
-        {
-            "id": 19,
-            "naziv": "Ljuljačka",
-            "boja": "Crvena",
-            "ljubimac": {
-                "id": 10,
-                "ime": "Koko",
-                "vrsta": "Kakadu",
-                "spol": "Mužjak",
-                "starost": 10,
-                "zivotniVijek": 50,
-                "boja": "Bijela",
-                "imeVlasnika": "Tamara",
-                "prehrana": "Biljožder"
-            }
-        },
-        {
-            "id": 20,
-            "naziv": "Zvonce",
-            "boja": "Zlatna",
-            "ljubimac": {
-                "id": 10,
-                "ime": "Koko",
-                "vrsta": "Kakadu",
-                "spol": "Mužjak",
-                "starost": 10,
-                "zivotniVijek": 50,
-                "boja": "Bijela",
-                "imeVlasnika": "Tamara",
-                "prehrana": "Biljožder"
-            }
-        },
-        {
-            "id": 1,
-            "naziv": "Lopta",
-            "boja": "Zelena",
-            "ljubimac": {
-                "id": 1,
-                "ime": "Kira",
-                "vrsta": "Pas",
-                "spol": "Ženka",
-                "starost": 3,
-                "zivotniVijek": 11,
-                "boja": "Žuta",
-                "imeVlasnika": "Ivan",
-                "prehrana": "Mesožder"
-            }
-        }]
+        "examples": [
+          {
+            "ime": "Marko",
+            "prezime": "Horvat"
+          },
+          {
+            "ime": "Ana",
+            "prezime": "Marić"
+          },
+          {
+            "ime": "Petra",
+            "prezime": "Novak"
+          },
+          {
+            "ime": "Ivan",
+            "prezime": "Kovačić"
+          },
+          {
+            "ime": "Ivana",
+            "prezime": "Barić"
+          },
+          {
+            "ime": "Marko",
+            "prezime": "Vuković"
+          },
+          {
+            "ime": "Petra",
+            "prezime": "Horvat"
+          },
+          {
+            "ime": "Ana",
+            "prezime": "Kovač"
+          },
+          {
+            "ime": "Ivana",
+            "prezime": "Novak"
+          },
+          {
+            "ime": "Luka",
+            "prezime": "Horvat"
+          }
+        ]
+      }
     },
     "examples": [
-        [{
-            "id": 2,
-            "naziv": "Uže",
-            "boja": "Plava",
-            "ljubimac": {
-                "id": 1,
-                "ime": "Kira",
-                "vrsta": "Pas",
-                "spol": "Ženka",
-                "starost": 3,
-                "zivotniVijek": 11,
-                "boja": "Žuta",
-                "imeVlasnika": "Ivan",
-                "prehrana": "Mesožder"
-            }
-        },
-        {
-            "id": 3,
-            "naziv": "Tobogan",
-            "boja": "Žuta",
-            "ljubimac": {
-                "id": 2,
-                "ime": "Korni",
-                "vrsta": "Kornjača",
-                "spol": "Ženka",
-                "starost": 6,
-                "zivotniVijek": 30,
-                "boja": "Zelena",
-                "imeVlasnika": "Fran",
-                "prehrana": "Svežder"
-            }
-        },
-        {
-            "id": 4,
-            "naziv": "Tobogan",
-            "boja": "Plava",
-            "ljubimac": {
-                "id": 2,
-                "ime": "Korni",
-                "vrsta": "Kornjača",
-                "spol": "Ženka",
-                "starost": 6,
-                "zivotniVijek": 30,
-                "boja": "Zelena",
-                "imeVlasnika": "Fran",
-                "prehrana": "Svežder"
-            }
-        },
-        {
-            "id": 5,
-            "naziv": "Zvonce",
-            "boja": "Roza",
-            "ljubimac": {
-                "id": 3,
-                "ime": "Micika",
-                "vrsta": "Mačka",
-                "spol": "Ženka",
-                "starost": 2,
-                "zivotniVijek": 17,
-                "boja": "Bijela",
-                "imeVlasnika": "Tomislav",
-                "prehrana": "Mesožder"
-            }
-        },
-        {
-            "id": 6,
-            "naziv": "Plišanac",
-            "boja": "Smeđa",
-            "ljubimac": {
-                "id": 3,
-                "ime": "Micika",
-                "vrsta": "Mačka",
-                "spol": "Ženka",
-                "starost": 2,
-                "zivotniVijek": 17,
-                "boja": "Bijela",
-                "imeVlasnika": "Tomislav",
-                "prehrana": "Mesožder"
-            }
-        },
-        {
-            "id": 7,
-            "naziv": "Kuglice",
-            "boja": "Zelena",
-            "ljubimac": {
-                "id": 4,
-                "ime": "Anđa",
-                "vrsta": "Riba",
-                "spol": "Ženka",
-                "starost": 3,
-                "zivotniVijek": 13,
-                "boja": "Narančasta",
-                "imeVlasnika": "Ivona",
-                "prehrana": "Biljožder"
-            }
-        },
-        {
-            "id": 8,
-            "naziv": "Štapići",
-            "boja": "Crvena",
-            "ljubimac": {
-                "id": 4,
-                "ime": "Anđa",
-                "vrsta": "Riba",
-                "spol": "Ženka",
-                "starost": 3,
-                "zivotniVijek": 13,
-                "boja": "Narančasta",
-                "imeVlasnika": "Ivona",
-                "prehrana": "Biljožder"
-            }
-        },
-        {
-            "id": 9,
-            "naziv": "Kolotur",
-            "boja": "Plava",
-            "ljubimac": {
-                "id": 5,
-                "ime": "Gricko",
-                "vrsta": "Hrčak",
-                "spol": "Mužjak",
-                "starost": 1,
-                "zivotniVijek": 3,
-                "boja": "Smeđa",
-                "imeVlasnika": "Lora",
-                "prehrana": "Mesožder"
-            }
-        },
-        {
-            "id": 10,
-            "naziv": "Tobogan",
-            "boja": "Zelena",
-            "ljubimac": {
-                "id": 5,
-                "ime": "Gricko",
-                "vrsta": "Hrčak",
-                "spol": "Mužjak",
-                "starost": 1,
-                "zivotniVijek": 3,
-                "boja": "Smeđa",
-                "imeVlasnika": "Lora",
-                "prehrana": "Mesožder"
-            }
-        },
-        {
-            "id": 11,
-            "naziv": "Lopta",
-            "boja": "Žuta",
-            "ljubimac": {
-                "id": 6,
-                "ime": "Rex",
-                "vrsta": "Pas",
-                "spol": "Mužjak",
-                "starost": 4,
-                "zivotniVijek": 12,
-                "boja": "Crna",
-                "imeVlasnika": "Marija",
-                "prehrana": "Mesožder"
-            }
-        },
-        {
-            "id": 12,
-            "naziv": "Frizbi",
-            "boja": "Plava",
-            "ljubimac": {
-                "id": 6,
-                "ime": "Rex",
-                "vrsta": "Pas",
-                "spol": "Mužjak",
-                "starost": 4,
-                "zivotniVijek": 12,
-                "boja": "Crna",
-                "imeVlasnika": "Marija",
-                "prehrana": "Mesožder"
-            }
-        },
-        {
-            "id": 13,
-            "naziv": "Kamen",
-            "boja": "Siva",
-            "ljubimac": {
-                "id": 7,
-                "ime": "Rafaelo",
-                "vrsta": "Kornjača",
-                "spol": "Ženka",
-                "starost": 7,
-                "zivotniVijek": 40,
-                "boja": "Zelena",
-                "imeVlasnika": "Marko",
-                "prehrana": "Svežder"
-            }
-        },
-        {
-            "id": 14,
-            "naziv": "Brodić",
-            "boja": "Smeđa",
-            "ljubimac": {
-                "id": 7,
-                "ime": "Rafaelo",
-                "vrsta": "Kornjača",
-                "spol": "Ženka",
-                "starost": 7,
-                "zivotniVijek": 40,
-                "boja": "Zelena",
-                "imeVlasnika": "Marko",
-                "prehrana": "Svežder"
-            }
-        },
-        {
-            "id": 15,
-            "naziv": "Miš",
-            "boja": "Smeđa",
-            "ljubimac": {
-                "id": 8,
-                "ime": "Leo",
-                "vrsta": "Mačka",
-                "spol": "Mužjak",
-                "starost": 5,
-                "zivotniVijek": 15,
-                "boja": "Siva",
-                "imeVlasnika": "Ana",
-                "prehrana": "Mesožder"
-            }
-        },
-        {
-            "id": 16,
-            "naziv": "Konop",
-            "boja": "Zelena",
-            "ljubimac": {
-                "id": 8,
-                "ime": "Leo",
-                "vrsta": "Mačka",
-                "spol": "Mužjak",
-                "starost": 5,
-                "zivotniVijek": 15,
-                "boja": "Siva",
-                "imeVlasnika": "Ana",
-                "prehrana": "Mesožder"
-            }
-        },
-        {
-            "id": 17,
-            "naziv": "Alge",
-            "boja": "Zelena",
-            "ljubimac": {
-                "id": 9,
-                "ime": "Šara",
-                "vrsta": "Riba",
-                "spol": "Ženka",
-                "starost": 2,
-                "zivotniVijek": 10,
-                "boja": "Zlatna",
-                "imeVlasnika": "David",
-                "prehrana": "Biljožder"
-            }
-        },
-        {
-            "id": 18,
-            "naziv": "Kamen",
-            "boja": "Siva",
-            "ljubimac": {
-                "id": 9,
-                "ime": "Šara",
-                "vrsta": "Riba",
-                "spol": "Ženka",
-                "starost": 2,
-                "zivotniVijek": 10,
-                "boja": "Zlatna",
-                "imeVlasnika": "David",
-                "prehrana": "Biljožder"
-            }
-        },
-        {
-            "id": 19,
-            "naziv": "Ljuljačka",
-            "boja": "Crvena",
-            "ljubimac": {
-                "id": 10,
-                "ime": "Koko",
-                "vrsta": "Kakadu",
-                "spol": "Mužjak",
-                "starost": 10,
-                "zivotniVijek": 50,
-                "boja": "Bijela",
-                "imeVlasnika": "Tamara",
-                "prehrana": "Biljožder"
-            }
-        },
-        {
-            "id": 20,
-            "naziv": "Zvonce",
-            "boja": "Zlatna",
-            "ljubimac": {
-                "id": 10,
-                "ime": "Koko",
-                "vrsta": "Kakadu",
-                "spol": "Mužjak",
-                "starost": 10,
-                "zivotniVijek": 50,
-                "boja": "Bijela",
-                "imeVlasnika": "Tamara",
-                "prehrana": "Biljožder"
-            }
-        },
-        {
-            "id": 1,
-            "naziv": "Lopta",
-            "boja": "Zelena",
-            "ljubimac": {
-                "id": 1,
-                "ime": "Kira",
-                "vrsta": "Pas",
-                "spol": "Ženka",
-                "starost": 3,
-                "zivotniVijek": 11,
-                "boja": "Žuta",
-                "imeVlasnika": "Ivan",
-                "prehrana": "Mesožder"
-            }
-        }]
+      {
+        "id": 1,
+        "ime": "Buddy",
+        "vrsta": "pas",
+        "spol": "mužjak",
+        "dob": 3,
+        "boja": "smeđa",
+        "prehrana": "mesožder",
+        "adresa": "Zagreb",
+        "veterinar": "Dr. Ana Kovač",
+        "vlasnik": {
+          "ime": "Marko",
+          "prezime": "Horvat"
+        }
+      },
+      {
+        "id": 2,
+        "ime": "Whiskers",
+        "vrsta": "mačka",
+        "spol": "ženka",
+        "dob": 2,
+        "boja": "siva",
+        "prehrana": "mesožder",
+        "adresa": "Split",
+        "veterinar": "Dr. Ivan Petrović",
+        "vlasnik": {
+          "ime": "Ana",
+          "prezime": "Marić"
+        }
+      },
+      {
+        "id": 3,
+        "ime": "Rocky",
+        "vrsta": "pas",
+        "spol": "mužjak",
+        "dob": 4,
+        "boja": "crna i smeđa",
+        "prehrana": "mesožder",
+        "adresa": "Rijeka",
+        "veterinar": "Dr. Marta Tomić",
+        "vlasnik": {
+          "ime": "Petra",
+          "prezime": "Novak"
+        }
+      },
+      {
+        "id": 4,
+        "ime": "Mittens",
+        "vrsta": "mačka",
+        "spol": "ženka",
+        "dob": 1,
+        "boja": "bijela",
+        "prehrana": "mesožder",
+        "adresa": "Osijek",
+        "veterinar": "Dr. Maja Horvat",
+        "vlasnik": {
+          "ime": "Ivan",
+          "prezime": "Kovačić"
+        }
+      },
+      {
+        "id": 5,
+        "ime": "Fluffy",
+        "vrsta": "hrčak",
+        "spol": "mužjak",
+        "dob": 1,
+        "boja": "smeđi",
+        "prehrana": "biljožder",
+        "adresa": "Zadar",
+        "veterinar": "Dr. Petra Kovač",
+        "vlasnik": {
+          "ime": "Ivana",
+          "prezime": "Barić"
+        }
+      },
+      {
+        "id": 6,
+        "ime": "Lola",
+        "vrsta": "pas",
+        "spol": "ženka",
+        "dob": 2,
+        "boja": "crna",
+        "prehrana": "mesožder",
+        "adresa": "Pula",
+        "veterinar": "Dr. Luka Novak",
+        "vlasnik": {
+          "ime": "Marko",
+          "prezime": "Vuković"
+        }
+      },
+      {
+        "id": 7,
+        "ime": "Oliver",
+        "vrsta": "mačka",
+        "spol": "mužjak",
+        "dob": 3,
+        "boja": "narandžasta",
+        "prehrana": "mesožder",
+        "adresa": "Varaždin",
+        "veterinar": "Dr. Marija Kovač",
+        "vlasnik": {
+          "ime": "Petra",
+          "prezime": "Horvat"
+        }
+      },
+      {
+        "id": 8,
+        "ime": "Oreo",
+        "vrsta": "hrčak",
+        "spol": "mužjak",
+        "dob": 0,
+        "boja": "crno-bijeli",
+        "prehrana": "biljožder",
+        "adresa": "Karlovac",
+        "veterinar": "Dr. Ivan Barić",
+        "vlasnik": {
+          "ime": "Ana",
+          "prezime": "Kovač"
+        }
+      },
+      {
+        "id": 9,
+        "ime": "Polly",
+        "vrsta": "papiga",
+        "spol": "ženka",
+        "dob": 2,
+        "boja": "šareno",
+        "prehrana": "biljožder",
+        "adresa": "Zagreb",
+        "veterinar": "Dr. Ana Kovač",
+        "vlasnik": {
+          "ime": "Ivana",
+          "prezime": "Novak"
+        }
+      },
+      {
+        "id": 10,
+        "ime": "Shelly",
+        "vrsta": "kornjača",
+        "spol": "ženka",
+        "dob": 5,
+        "boja": "zelena",
+        "prehrana": "biljožder",
+        "adresa": "Zadar",
+        "veterinar": "Dr. Petra Kovač",
+        "vlasnik": {
+          "ime": "Luka",
+          "prezime": "Horvat"
+        }
+      }
     ]
+  },
+  "examples": [
+    [
+      {
+        "id": 1,
+        "ime": "Buddy",
+        "vrsta": "pas",
+        "spol": "mužjak",
+        "dob": 3,
+        "boja": "smeđa",
+        "prehrana": "mesožder",
+        "adresa": "Zagreb",
+        "veterinar": "Dr. Ana Kovač",
+        "vlasnik": {
+          "ime": "Marko",
+          "prezime": "Horvat"
+        }
+      },
+      {
+        "id": 2,
+        "ime": "Whiskers",
+        "vrsta": "mačka",
+        "spol": "ženka",
+        "dob": 2,
+        "boja": "siva",
+        "prehrana": "mesožder",
+        "adresa": "Split",
+        "veterinar": "Dr. Ivan Petrović",
+        "vlasnik": {
+          "ime": "Ana",
+          "prezime": "Marić"
+        }
+      },
+      {
+        "id": 3,
+        "ime": "Rocky",
+        "vrsta": "pas",
+        "spol": "mužjak",
+        "dob": 4,
+        "boja": "crna i smeđa",
+        "prehrana": "mesožder",
+        "adresa": "Rijeka",
+        "veterinar": "Dr. Marta Tomić",
+        "vlasnik": {
+          "ime": "Petra",
+          "prezime": "Novak"
+        }
+      },
+      {
+        "id": 4,
+        "ime": "Mittens",
+        "vrsta": "mačka",
+        "spol": "ženka",
+        "dob": 1,
+        "boja": "bijela",
+        "prehrana": "mesožder",
+        "adresa": "Osijek",
+        "veterinar": "Dr. Maja Horvat",
+        "vlasnik": {
+          "ime": "Ivan",
+          "prezime": "Kovačić"
+        }
+      },
+      {
+        "id": 5,
+        "ime": "Fluffy",
+        "vrsta": "hrčak",
+        "spol": "mužjak",
+        "dob": 1,
+        "boja": "smeđi",
+        "prehrana": "biljožder",
+        "adresa": "Zadar",
+        "veterinar": "Dr. Petra Kovač",
+        "vlasnik": {
+          "ime": "Ivana",
+          "prezime": "Barić"
+        }
+      },
+      {
+        "id": 6,
+        "ime": "Lola",
+        "vrsta": "pas",
+        "spol": "ženka",
+        "dob": 2,
+        "boja": "crna",
+        "prehrana": "mesožder",
+        "adresa": "Pula",
+        "veterinar": "Dr. Luka Novak",
+        "vlasnik": {
+          "ime": "Marko",
+          "prezime": "Vuković"
+        }
+      },
+      {
+        "id": 7,
+        "ime": "Oliver",
+        "vrsta": "mačka",
+        "spol": "mužjak",
+        "dob": 3,
+        "boja": "narandžasta",
+        "prehrana": "mesožder",
+        "adresa": "Varaždin",
+        "veterinar": "Dr. Marija Kovač",
+        "vlasnik": {
+          "ime": "Petra",
+          "prezime": "Horvat"
+        }
+      },
+      {
+        "id": 8,
+        "ime": "Oreo",
+        "vrsta": "hrčak",
+        "spol": "mužjak",
+        "dob": 0,
+        "boja": "crno-bijeli",
+        "prehrana": "biljožder",
+        "adresa": "Karlovac",
+        "veterinar": "Dr. Ivan Barić",
+        "vlasnik": {
+          "ime": "Ana",
+          "prezime": "Kovač"
+        }
+      },
+      {
+        "id": 9,
+        "ime": "Polly",
+        "vrsta": "papiga",
+        "spol": "ženka",
+        "dob": 2,
+        "boja": "šareno",
+        "prehrana": "biljožder",
+        "adresa": "Zagreb",
+        "veterinar": "Dr. Ana Kovač",
+        "vlasnik": {
+          "ime": "Ivana",
+          "prezime": "Novak"
+        }
+      },
+      {
+        "id": 10,
+        "ime": "Shelly",
+        "vrsta": "kornjača",
+        "spol": "ženka",
+        "dob": 5,
+        "boja": "zelena",
+        "prehrana": "biljožder",
+        "adresa": "Zadar",
+        "veterinar": "Dr. Petra Kovač",
+        "vlasnik": {
+          "ime": "Luka",
+          "prezime": "Horvat"
+        }
+      }
+    ]
+  ]
 }

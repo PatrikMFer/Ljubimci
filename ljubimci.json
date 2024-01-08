@@ -1,0 +1,152 @@
+[
+  {
+    "id": 1,
+    "ime": "Buddy",
+    "vrsta": "pas",
+    "spol": "mužjak",
+    "dob": 3,
+    "boja": "smeđa",
+    "prehrana": "mesožder",
+    "adresa": "Zagreb",
+    "veterinar": "Dr. Ana Kovač",
+    "vlasnik": {
+      "ime": "Marko",
+      "prezime": "Horvat"
+    }
+  },
+  {
+    "id": 2,
+    "ime": "Whiskers",
+    "vrsta": "mačka",
+    "spol": "ženka",
+    "dob": 2,
+    "boja": "siva",
+    "prehrana": "mesožder",
+    "adresa": "Split",
+    "veterinar": "Dr. Ivan Petrović",
+    "vlasnik": {
+      "ime": "Ana",
+      "prezime": "Marić"
+    }
+  },
+  {
+    "id": 3,
+    "ime": "Rocky",
+    "vrsta": "pas",
+    "spol": "mužjak",
+    "dob": 4,
+    "boja": "crna i smeđa",
+    "prehrana": "mesožder",
+    "adresa": "Rijeka",
+    "veterinar": "Dr. Marta Tomić",
+    "vlasnik": {
+      "ime": "Petra",
+      "prezime": "Novak"
+    }
+  },
+  {
+    "id": 4,
+    "ime": "Mittens",
+    "vrsta": "mačka",
+    "spol": "ženka",
+    "dob": 1,
+    "boja": "bijela",
+    "prehrana": "mesožder",
+    "adresa": "Osijek",
+    "veterinar": "Dr. Maja Horvat",
+    "vlasnik": {
+      "ime": "Ivan",
+      "prezime": "Kovačić"
+    }
+  },
+  {
+    "id": 5,
+    "ime": "Fluffy",
+    "vrsta": "hrčak",
+    "spol": "mužjak",
+    "dob": 1,
+    "boja": "smeđi",
+    "prehrana": "biljožder",
+    "adresa": "Zadar",
+    "veterinar": "Dr. Petra Kovač",
+    "vlasnik": {
+      "ime": "Ivana",
+      "prezime": "Barić"
+    }
+  },
+  {
+    "id": 6,
+    "ime": "Lola",
+    "vrsta": "pas",
+    "spol": "ženka",
+    "dob": 2,
+    "boja": "crna",
+    "prehrana": "mesožder",
+    "adresa": "Pula",
+    "veterinar": "Dr. Luka Novak",
+    "vlasnik": {
+      "ime": "Marko",
+      "prezime": "Vuković"
+    }
+  },
+  {
+    "id": 7,
+    "ime": "Oliver",
+    "vrsta": "mačka",
+    "spol": "mužjak",
+    "dob": 3,
+    "boja": "narandžasta",
+    "prehrana": "mesožder",
+    "adresa": "Varaždin",
+    "veterinar": "Dr. Marija Kovač",
+    "vlasnik": {
+      "ime": "Petra",
+      "prezime": "Horvat"
+    }
+  },
+  {
+    "id": 8,
+    "ime": "Oreo",
+    "vrsta": "hrčak",
+    "spol": "mužjak",
+    "dob": 0,
+    "boja": "crno-bijeli",
+    "prehrana": "biljožder",
+    "adresa": "Karlovac",
+    "veterinar": "Dr. Ivan Barić",
+    "vlasnik": {
+      "ime": "Ana",
+      "prezime": "Kovač"
+    }
+  },
+  {
+    "id": 9,
+    "ime": "Polly",
+    "vrsta": "papiga",
+    "spol": "ženka",
+    "dob": 2,
+    "boja": "šareno",
+    "prehrana": "biljožder",
+    "adresa": "Zagreb",
+    "veterinar": "Dr. Ana Kovač",
+    "vlasnik": {
+      "ime": "Ivana",
+      "prezime": "Novak"
+    }
+  },
+  {
+    "id": 10,
+    "ime": "Shelly",
+    "vrsta": "kornjača",
+    "spol": "ženka",
+    "dob": 5,
+    "boja": "zelena",
+    "prehrana": "biljožder",
+    "adresa": "Zadar",
+    "veterinar": "Dr. Petra Kovač",
+    "vlasnik": {
+      "ime": "Luka",
+      "prezime": "Horvat"
+    }
+  }
+]
