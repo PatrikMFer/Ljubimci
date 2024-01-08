@@ -24,6 +24,11 @@ button {
   width: 100px;
 }
 
+.topContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
 .navContainer {
   margin: 40px auto 40px auto;
   width: 100%;

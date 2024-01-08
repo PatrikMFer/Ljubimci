@@ -31,7 +31,7 @@ const LjubimciDataTable: React.FC = () => {
   ): Promise<void> => {
     try {
       const response = await fetch(
-        `http://localhost:8080/api/ljubimci/ljubimciIVlasnici?searchText=${searchText}&attribute=${attribute}`
+        `http://localhost:8080/api/ljubimci?searchText=${searchText}&attribute=${attribute}`
       );
       const result: { status: string; message: string; response: Ljubimac[] } =
         await response.json();
@@ -48,6 +48,20 @@ const LjubimciDataTable: React.FC = () => {
 
   const handleSearch = async (): Promise<void> => {
     fetchData(searchText, selectedAttribute);
+  };
+
+  const exportOpenAPI = async () => {
+    try {
+      const response = await fetch(
+        "http://localhost:8080/api/ljubimci/openapi.json"
+      );
+      const openApiSpec = await response.json();
+
+      const jsonData = JSON.stringify(openApiSpec, null, 2);
+      downloadFile(jsonData, "openapi.json", "application/json");
+    } catch (error) {
+      console.error("Error exporting OpenAPI:", error);
+    }
   };
 
   const exportToCSV = async () => {
@@ -126,9 +140,14 @@ const LjubimciDataTable: React.FC = () => {
 
   return (
     <div className="dataTableContainer">
-      <button id="indexBtn">
-        <a href="index.html">Index.html</a>
-      </button>
+      <div className="topContainer">
+        <button id="indexBtn">
+          <a href="index.html">Index.html</a>
+        </button>
+        <button id="openApiBtn" onClick={exportOpenAPI}>
+          Export OpenAPI
+        </button>
+      </div>
       <div className="navContainer">
         <div className="searchContainer">
           <label id="searchLabel" htmlFor="searchText">

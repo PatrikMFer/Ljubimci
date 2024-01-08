@@ -1,0 +1,513 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Api za upravljanje kolekcijom ljubimaca",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/api/ljubimci": {
+      "get": {
+        "description": "Dohvati listu ljubimaca sa vlasnicima.",
+        "parameters": [
+          {
+            "name": "searchText",
+            "in": "query",
+            "description": "Tekst za pretragu ljubimaca",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attribute",
+            "in": "query",
+            "description": "Atribut za pretragu ljubimaca",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Uspješno dohvaćena kolekcija ljubimaca",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LjubimacResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ljubimci nisu pronađeni"
+          }
+        }
+      },
+      "post": {
+        "description": "Ubaci pojedinačnog ljubimca sa vlasnikom u kolekciju.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LjubimacRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Uspješno kreiran ljubimac s vlasnikom",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LjubimacResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Pogrešan zahtjev"
+          }
+        }
+      }
+    },
+    "/api/ljubimci/id/{idLjubimca}": {
+      "get": {
+        "description": "Dohvati ljubimce po ID-u.",
+        "parameters": [
+          {
+            "name": "idLjubimca",
+            "in": "path",
+            "description": "ID ljubimca",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Uspješno dohvaćen pojedinačni ljubimac",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LjubimacResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ljubimac nije pronađen"
+          }
+        }
+      }
+    },
+    "/api/ljubimci/adresa/{adresaLjubimca}": {
+      "get": {
+        "description": "Dohvati ljubimce po adresi.",
+        "parameters": [
+          {
+            "name": "adresaLjubimca",
+            "in": "path",
+            "description": "Adresa ljubimca",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Uspješno dohvaćeni ljubimci na adresi",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LjubimacResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Nema ljubimaca na adresi"
+          }
+        }
+      }
+    },
+    "/api/ljubimci/ime/{imeLjubimca}": {
+      "get": {
+        "description": "Dohvati ljubimce po imenu.",
+        "parameters": [
+          {
+            "name": "imeLjubimca",
+            "in": "path",
+            "description": "Ime ljubimca",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Uspješno dohvaćeni ljubimci sa imenom",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LjubimacResponse"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Nema ljubimaca sa zadanim imenom"
+          }
+        }
+      }
+    },
+    "/api/ljubimci/vrsta/{vrstaLjubimca}": {
+      "get": {
+        "description": "Dohvati ljubimce po vrsti.",
+        "parameters": [
+          {
+            "name": "vrstaLjubimca",
+            "in": "path",
+            "description": "Vrsta ljubimca",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Uspješno dohvaćeni ljubimci sa vrstom",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LjubimacResponse"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Nema ljubimaca sa zadatom vrstom"
+          }
+        }
+      }
+    },
+    "/api/ljubimci/openapi.json": {
+      "get": {
+        "description": "Dohvati OpenAPI specifikaciju.",
+        "responses": {
+          "200": {
+            "description": "Uspješno dohvaćena OpenAPI specifikacija",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenApiSpec"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "OpenAPI specifikacija nije pronađena"
+          }
+        }
+      }
+    },
+    "/api/ljubimci/{id}": {
+      "put": {
+        "description": "Ažuriraj pojedinačnog ljubimca s ID-om",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID ljubimca",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Podaci za ažuriranje ljubimca",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LjubimacRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Uspješno ažuriran ljubimac",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Ljubimac"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ljubimac nije pronađen"
+          }
+        }
+      },
+      "delete": {
+        "description": "Brisanje ljubimca temeljem ID-a.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID ljubimca",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Uspješno izbrisan ljubimac",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "response": {
+                      "type": "null"
+                    }
+                  },
+                  "required": ["status", "message", "response"]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ljubimac nije pronađen"
+          }
+        }
+      }
+    },
+    "/api/vlasnici": {
+      "get": {
+        "description": "Dohvati sve vlasnike.",
+        "responses": {
+          "200": {
+            "description": "Uspješno dohvaćeni vlasnici",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Vlasnik"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/vlasnici/{id}": {
+      "get": {
+        "description": "Dohvati vlasnika po ID-u.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID vlasnika",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Uspješno dohvaćen vlasnik",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Vlasnik"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Vlasnik nije pronađen"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "LjubimacResponse": {
+        "type": "object",
+        "properties": {
+          "idLjubimac": {
+            "type": "integer"
+          },
+          "imeLjubimac": {
+            "type": "string"
+          },
+          "vrsta": {
+            "type": "string"
+          },
+          "spol": {
+            "type": "string"
+          },
+          "dob": {
+            "type": "integer"
+          },
+          "boja": {
+            "type": "string"
+          },
+          "prehrana": {
+            "type": "string"
+          },
+          "adresa": {
+            "type": "string"
+          },
+          "veterinar": {
+            "type": "string"
+          },
+          "imeVlasnika": {
+            "type": "string"
+          },
+          "prezimeVlasnika": {
+            "type": "string"
+          }
+        }
+      },
+      "OpenApiSpec": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          }
+        }
+      },
+      "LjubimacRequest": {
+        "type": "object",
+        "properties": {
+          "imeLjubimac": {
+            "type": "string"
+          },
+          "vrsta": {
+            "type": "string"
+          },
+          "spol": {
+            "type": "string"
+          },
+          "dob": {
+            "type": "integer"
+          },
+          "boja": {
+            "type": "string"
+          },
+          "prehrana": {
+            "type": "string"
+          },
+          "adresa": {
+            "type": "string"
+          },
+          "veterinar": {
+            "type": "string"
+          },
+          "imeVlasnika": {
+            "type": "string"
+          },
+          "prezimeVlasnika": {
+            "type": "string"
+          }
+        }
+      },
+      "Ljubimac": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "ime": {
+            "type": "string",
+            "maxLength": 50
+          },
+          "vrsta": {
+            "type": "string",
+            "maxLength": 50
+          },
+          "spol": {
+            "type": "string",
+            "maxLength": 25
+          },
+          "dob": {
+            "type": "integer"
+          },
+          "boja": {
+            "type": "string",
+            "maxLength": 50
+          },
+          "prehrana": {
+            "type": "string",
+            "maxLength": 25
+          },
+          "adresa": {
+            "type": "string",
+            "maxLength": 50
+          },
+          "veterinar": {
+            "type": "string",
+            "maxLength": 50
+          },
+          "vlasnik": {
+            "$ref": "#/components/schemas/Vlasnik"
+          }
+        },
+        "required": ["id", "ime", "vrsta", "spol", "dob", "boja", "prehrana", "adresa", "veterinar", "vlasnik"]
+      },
+      "Vlasnik": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "ime": {
+            "type": "string",
+            "maxLength": 50
+          },
+          "prezime": {
+            "type": "string",
+            "maxLength": 50
+          }
+        },
+        "required": ["id", "ime", "prezime"]
+      }
+    }
+  }
+
+}

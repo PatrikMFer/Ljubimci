@@ -10,10 +10,19 @@ import com.ferovac.backend.dto.LjubimacResponse;
 import com.ferovac.backend.dto.ApiResponseWrapper;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -34,7 +43,7 @@ public class LjubimacController {
     }
 
     //  Get za dohvacanje cijele kolekcije
-    @GetMapping("/ljubimciIVlasnici")
+    @GetMapping()
     public ResponseEntity<ApiResponseWrapper<?>> getLjubimciWithVlasnici(
             @RequestParam(required = false, defaultValue = "") String searchText,
             @RequestParam(required = false, defaultValue = "all") String attribute
@@ -62,23 +71,6 @@ public class LjubimacController {
         }
 
         ApiResponseWrapper<List<LjubimacResponse>> apiResponseWrapper = new ApiResponseWrapper<>("OK", "Dohvaćena je kolekcija ljubimaca", ljubimacResponses);
-        return ResponseEntity.ok(apiResponseWrapper);
-    }
-
-
-
-
-    @GetMapping("/ljubimciIVlasniciJSON")
-    public ResponseEntity<ApiResponseWrapper<?>> getAllLjubimci() {
-        List<Ljubimac> ljubimci = ljubimacService.getAllLjubimci();
-
-        if (ljubimci.isEmpty()) {
-            throw new EntityNotFoundException("Kolekcija je prazna");
-        }
-
-        ljubimci.sort(Comparator.comparing(Ljubimac::getId));
-        ApiResponseWrapper<List<Ljubimac>> apiResponseWrapper = new ApiResponseWrapper<>("OK", "Dohvaćena je cijela kolekcija ljubimaca", ljubimci);
-
         return ResponseEntity.ok(apiResponseWrapper);
     }
 
@@ -164,7 +156,28 @@ public class LjubimacController {
     }
 
 
+    @GetMapping("/openapi.json")
+    public ResponseEntity<String> getOpenApiSpec() {
+        try {
+            Path path = Paths.get("src/main/resources/openapi.json");
+            Resource resource = new UrlResource(path.toUri());
 
+            if (resource.exists()) {
+                byte[] content = Files.readAllBytes(path);
+
+                HttpHeaders headers = new HttpHeaders();
+                headers.setContentType(MediaType.APPLICATION_JSON);
+                headers.setContentLength(content.length);
+
+                return new ResponseEntity<>(new String(content), headers, HttpStatus.OK);
+            } else {
+                throw new EntityNotFoundException("OpenAPI specifikacija nije pronađena");
+            }
+        } catch (IOException ex) {
+            ApiResponseWrapper<Void> apiResponseWrapper = new ApiResponseWrapper<>("INTERNAL SERVER ERROR", ex.getMessage(), null);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(apiResponseWrapper.toString());
+        }
+    }
 
     //  Post za ubacivanje pojedinačnog resursa u kolekciju
     @PostMapping
