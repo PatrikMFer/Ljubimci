@@ -61,6 +61,8 @@ public class LjubimacService {
         }
 
         switch (attribute) {
+            case "idLjubimac":
+                return ljubimacRepository.findByIdWildCardSearch(searchText);
             case "imeLjubimac":
                 return ljubimacRepository.findByImeContainingIgnoreCase(searchText);
             case "vrsta":
@@ -68,7 +70,7 @@ public class LjubimacService {
             case "spol":
                 return ljubimacRepository.findBySpolContainingIgnoreCase(searchText);
             case "dob":
-                return ljubimacRepository.findByDob(Integer.parseInt(searchText));
+                return ljubimacRepository.findByDobWildCardSearch(searchText);
             case "boja":
                 return ljubimacRepository.findByBojaContainingIgnoreCase(searchText);
             case "prehrana":

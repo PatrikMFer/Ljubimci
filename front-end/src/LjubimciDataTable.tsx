@@ -152,6 +152,7 @@ const LjubimciDataTable: React.FC = () => {
             onChange={(e) => setSelectedAttribute(e.target.value)}
           >
             <option value="all">Svi atributi</option>
+            <option value="idLjubimac">Id ljubimca</option>
             <option value="imeLjubimac">Ime ljubimca</option>
             <option value="vrsta">Vrsta</option>
             <option value="spol">Spol</option>

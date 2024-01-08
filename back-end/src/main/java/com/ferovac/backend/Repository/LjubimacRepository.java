@@ -18,6 +18,7 @@ public interface LjubimacRepository extends JpaRepository<Ljubimac, Long> {
     List<Ljubimac> findByVrsta(String vrsta);
 
     @Query("SELECT lj FROM Ljubimac lj WHERE " +
+            "UPPER(CAST(lj.id AS string)) LIKE UPPER(CONCAT('%', :searchText, '%')) OR " +
             "UPPER(lj.ime) LIKE UPPER(CONCAT('%', :searchText, '%')) OR " +
             "UPPER(lj.vrsta) LIKE UPPER(CONCAT('%', :searchText, '%')) OR " +
             "UPPER(lj.spol) LIKE UPPER(CONCAT('%', :searchText, '%')) OR " +
@@ -30,13 +31,19 @@ public interface LjubimacRepository extends JpaRepository<Ljubimac, Long> {
             "UPPER(lj.vlasnik.prezime) LIKE UPPER(CONCAT('%', :searchText, '%'))")
     List<Ljubimac> findByWildCardSearch(@Param("searchText") String searchText);
 
+    @Query("SELECT lj FROM Ljubimac lj WHERE " +
+            "UPPER(CAST(lj.id AS string)) LIKE UPPER(CONCAT('%', :searchText, '%'))")
+    List<Ljubimac> findByIdWildCardSearch(@Param("searchText") String searchText);
+
     List<Ljubimac> findByImeContainingIgnoreCase(String ime);
 
     List<Ljubimac> findByVrstaContainingIgnoreCase(String vrsta);
 
     List<Ljubimac> findBySpolContainingIgnoreCase(String spol);
 
-    List<Ljubimac> findByDob(int dob);
+    @Query("SELECT lj FROM Ljubimac lj WHERE " +
+            "UPPER(CAST(lj.dob AS string)) LIKE UPPER(CONCAT('%', :searchText, '%'))")
+    List<Ljubimac> findByDobWildCardSearch(@Param("searchText") String searchText);
 
     List<Ljubimac> findByBojaContainingIgnoreCase(String boja);
 
