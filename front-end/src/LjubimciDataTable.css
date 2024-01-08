@@ -1,7 +1,28 @@
-/* table {
-  background: rgb(234 234 234) !important;
-  border-radius: 10px;
+table {
+  background: rgb(234 234 234);
+  border-collapse: separate;
+  border: solid black 1px;
+  border-radius: 6px;
+  text-align: center;
 }
+
+td,
+th {
+  border-left: solid black 1px;
+  border-top: solid black 1px;
+  padding: 10px;
+}
+
+th {
+  border-top: none;
+}
+
+td:first-child,
+th:first-child {
+  border-left: none;
+}
+
+/* 
 
 button {
   border-radius: 5px;

@@ -1,6 +1,6 @@
 #GET http://localhost:8080/api/ljubimci
 
-#GET http://localhost:8080/api/ljubimci/ljubimciIVlasnici
+#GET http://localhost:8080/api/ljubimci/ljubimciIVlasnici?searchText=za&attribute=adresa
 
 #GET http://localhost:8080/api/ljubimci/ljubimciIVlasniciJSON
 
@@ -18,7 +18,7 @@
 #Content-Type: application/json
 #
 #{
-#    "imeLjubimac": "Lolipop",
+#    "imeLjubimac": "Zara",
 #    "vrsta": "orao",
 #    "spol": "muški",
 #    "dob": 2,

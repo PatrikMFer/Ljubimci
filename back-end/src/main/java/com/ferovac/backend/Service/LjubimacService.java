@@ -47,6 +47,47 @@ public class LjubimacService {
         return ljubimacRepository.findByVrsta(vrsta);
     }
 
+    public List<Ljubimac> pretraziLjubimceWildCard(String searchText) {
+        if (searchText.isEmpty()) {
+            return getAllLjubimci();
+        }
+        return ljubimacRepository.findByWildCardSearch(searchText);
+    }
+
+
+    public List<Ljubimac> pretraziLjubimcePoAtributu(String searchText, String attribute) {
+        if (searchText.isEmpty()) {
+            return getAllLjubimci();
+        }
+
+        switch (attribute) {
+            case "imeLjubimac":
+                return ljubimacRepository.findByImeContainingIgnoreCase(searchText);
+            case "vrsta":
+                return ljubimacRepository.findByVrstaContainingIgnoreCase(searchText);
+            case "spol":
+                return ljubimacRepository.findBySpolContainingIgnoreCase(searchText);
+            case "dob":
+                return ljubimacRepository.findByDob(Integer.parseInt(searchText));
+            case "boja":
+                return ljubimacRepository.findByBojaContainingIgnoreCase(searchText);
+            case "prehrana":
+                return ljubimacRepository.findByPrehranaContainingIgnoreCase(searchText);
+            case "adresa":
+                return ljubimacRepository.findByAdresaContainingIgnoreCase(searchText);
+            case "veterinar":
+                return ljubimacRepository.findByVeterinarContainingIgnoreCase(searchText);
+            case "imeVlasnika":
+                return ljubimacRepository.findByVlasnik_ImeContainingIgnoreCase(searchText);
+            case "prezimeVlasnika":
+                return ljubimacRepository.findByVlasnik_PrezimeContainingIgnoreCase(searchText);
+            default:
+                throw new IllegalArgumentException("Nepoznat atribut: " + attribute);
+        }
+    }
+
+
+
     public Ljubimac createLjubimac(Ljubimac ljubimac, Vlasnik vlasnik) {
         try {
             ljubimac.setVlasnik(vlasnik);

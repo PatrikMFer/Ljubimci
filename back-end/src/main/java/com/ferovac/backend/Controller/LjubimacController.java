@@ -35,8 +35,18 @@ public class LjubimacController {
 
     //  Get za dohvacanje cijele kolekcije
     @GetMapping("/ljubimciIVlasnici")
-    public ResponseEntity<ApiResponseWrapper<?>> getLjubimciWithVlasnici() {
-        List<Ljubimac> ljubimci = ljubimacService.getAllLjubimci();
+    public ResponseEntity<ApiResponseWrapper<?>> getLjubimciWithVlasnici(
+            @RequestParam(required = false, defaultValue = "") String searchText,
+            @RequestParam(required = false, defaultValue = "all") String attribute
+    ) {
+        List<Ljubimac> ljubimci;
+
+        if ("all".equals(attribute)) {
+            ljubimci = ljubimacService.pretraziLjubimceWildCard(searchText);
+        } else {
+            ljubimci = ljubimacService.pretraziLjubimcePoAtributu(searchText, attribute);
+        }
+
         List<LjubimacResponse> ljubimacResponses = new ArrayList<>();
 
         for (Ljubimac ljubimac : ljubimci) {
@@ -44,14 +54,18 @@ public class LjubimacController {
             LjubimacResponse ljubimacResponse = new LjubimacResponse(ljubimac, vlasnik);
             ljubimacResponses.add(ljubimacResponse);
         }
+
         ljubimacResponses.sort(Comparator.comparing(LjubimacResponse::getIdLjubimac));
 
         if (ljubimacResponses.isEmpty()) {
             throw new EntityNotFoundException("Kolekcija je prazna");
         }
+
         ApiResponseWrapper<List<LjubimacResponse>> apiResponseWrapper = new ApiResponseWrapper<>("OK", "Dohvaćena je cijela kolekcija ljubimaca", ljubimacResponses);
         return ResponseEntity.ok(apiResponseWrapper);
     }
+
+
 
 
     @GetMapping("/ljubimciIVlasniciJSON")

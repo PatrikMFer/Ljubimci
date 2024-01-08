@@ -1,200 +1,172 @@
-import { useState, useEffect, useMemo } from "react";
-import { useTable, useSortBy } from "react-table";
-import { saveAs } from "file-saver";
+import React, { useEffect, useState } from "react";
+import { useTable } from "react-table";
 import "./LjubimciDataTable.css";
 
-const DataTable = () => {
-  const [data, setData] = useState([]);
-  const [searchText, setSearchText] = useState("");
-  const [selectedAttribute, setSelectedAttribute] = useState("all");
-  const [filteredData, setFilteredData] = useState([]);
+interface Ljubimac {
+  idLjubimac: number;
+  imeLjubimac: string;
+  vrsta: string;
+  spol: string;
+  dob: number;
+  boja: string;
+  prehrana: string;
+  adresa: string;
+  veterinar: string;
+  imeVlasnika: string;
+  prezimeVlasnika: string;
+}
+
+const LjubimciDataTable: React.FC = () => {
+  const [data, setData] = useState<Ljubimac[]>([]);
+  const [searchText, setSearchText] = useState<string>("");
+  const [selectedAttribute, setSelectedAttribute] = useState<string>("all");
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("http://localhost:8080/api/ljubimci");
-        const result = await response.json();
-        setData(result);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
+    fetchData("", selectedAttribute);
   }, []);
 
-  const handleSearch = () => {
-    // Filtriranje podataka kada se pritisne gumb "Pretraži"
-    const newFilteredData = data.filter((item) => {
-      if (selectedAttribute === "all") {
-        // Pretražuj sve atribute
-        return (
-          Object.values(item).some((value) =>
-            String(value).toLowerCase().includes(searchText.toLowerCase())
-          ) ||
-          Object.values(item.ljubimac).some((value) =>
-            String(value).toLowerCase().includes(searchText.toLowerCase())
-          )
-        );
-      } else {
-        // Pretražuj samo odabrani atribut
-        const attributeValue =
-          item[selectedAttribute] || item.ljubimac[selectedAttribute];
-        return (
-          attributeValue &&
-          String(attributeValue)
-            .toLowerCase()
-            .includes(searchText.toLowerCase())
-        );
-      }
-    });
+  const fetchData = async (
+    searchText: string,
+    attribute: string
+  ): Promise<void> => {
+    try {
+      const response = await fetch(
+        `http://localhost:8080/api/ljubimci/ljubimciIVlasnici?searchText=${searchText}&attribute=${attribute}`
+      );
+      const result: { status: string; message: string; response: Ljubimac[] } =
+        await response.json();
 
-    setFilteredData(newFilteredData);
+      if (result.status === "OK") {
+        setData(result.response);
+      } else {
+        console.error("Error fetching data:", result.message);
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
   };
 
-  const columns = useMemo(
+  const handleSearch = async (): Promise<void> => {
+    fetchData(searchText, selectedAttribute);
+  };
+
+  const exportToCSV = async () => {
+    try {
+      const csvData = convertToCSV(data);
+      downloadFile(csvData, "ljubimci.csv", "text/csv");
+    } catch (error) {
+      console.error("Error exporting to CSV:", error);
+    }
+  };
+
+  const exportToJSON = async () => {
+    try {
+      const transformedData = data.map((ljubimac) => {
+        return {
+          id: ljubimac.idLjubimac,
+          ime: ljubimac.imeLjubimac,
+          vrsta: ljubimac.vrsta,
+          spol: ljubimac.spol,
+          dob: ljubimac.dob,
+          boja: ljubimac.boja,
+          prehrana: ljubimac.prehrana,
+          adresa: ljubimac.adresa,
+          veterinar: ljubimac.veterinar,
+          vlasnik: {
+            id: ljubimac.idLjubimac,
+            ime: ljubimac.imeVlasnika,
+            prezime: ljubimac.prezimeVlasnika,
+          },
+        };
+      });
+
+      const jsonData = JSON.stringify(transformedData, null, 2);
+      downloadFile(jsonData, "ljubimci.json", "application/json");
+    } catch (error) {
+      console.error("Error exporting to JSON:", error);
+    }
+  };
+
+  const downloadFile = (data, fileName, fileType) => {
+    const blob = new Blob([data], { type: fileType });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = fileName;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  };
+
+  const convertToCSV = (data) => {
+    const headers = Object.keys(data[0]).join(",");
+    const rows = data.map((row) => Object.values(row).join(","));
+    return `${headers}\n${rows.join("\n")}`;
+  };
+
+  // react-table setup
+  const columns = React.useMemo(
     () => [
-      { Header: "Ime ljubimca", accessor: "ljubimac.ime" },
-      { Header: "Vrsta", accessor: "ljubimac.vrsta" },
-      { Header: "Spol", accessor: "ljubimac.spol" },
-      { Header: "Boja Ljubimca", accessor: "ljubimac.boja" },
-      { Header: "Starost", accessor: "ljubimac.starost" },
-      { Header: "Ime vlasnika", accessor: "ljubimac.imeVlasnika" },
-      { Header: "Prehrana", accessor: "ljubimac.prehrana" },
-      { Header: "Životni vijek", accessor: "ljubimac.zivotniVijek" },
-      { Header: "Naziv Igracke", accessor: "naziv" },
-      { Header: "Boja Igracke", accessor: "boja" },
+      { Header: "ID", accessor: "idLjubimac" },
+      { Header: "Ime ljubimca", accessor: "imeLjubimac" },
+      { Header: "Vrsta", accessor: "vrsta" },
+      { Header: "Spol", accessor: "spol" },
+      { Header: "Dob", accessor: "dob" },
+      { Header: "Boja", accessor: "boja" },
+      { Header: "Prehrana", accessor: "prehrana" },
+      { Header: "Adresa", accessor: "adresa" },
+      { Header: "Veterinar", accessor: "veterinar" },
+      { Header: "Ime vlasnika", accessor: "imeVlasnika" },
+      { Header: "Prezime vlasnika", accessor: "prezimeVlasnika" },
     ],
     []
   );
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable(
-      {
-        columns,
-        data: searchText ? filteredData : data, // Prikazujemo filtrirane podatke samo ako postoji tekst za pretraživanje
-      },
-      useSortBy
-    );
-
-  // Funkcija za generiranje JSON podataka
-  const generateJSON = async () => {
-    try {
-      // Provjeri jesu li podaci dostupni
-      if (!rows || rows.length === 0) {
-        console.error("No data available.");
-        return;
-      }
-
-      // Pripremi podatke za JSON
-      const jsonData = JSON.stringify(
-        rows.map((row) => row.original),
-        null,
-        2
-      );
-
-      // Kreiraj Blob objekt s JSON podacima
-      const blob = new Blob([jsonData], {
-        type: "application/json;charset=utf-8",
-      });
-
-      // Snimi JSON datoteku
-      saveAs(blob, "data.json");
-    } catch (error) {
-      console.error("Error generating JSON:", error);
-    }
-  };
-
-  // Funkcija za generiranje CSV podataka
-  const generateCSV = () => {
-    if (!rows || rows.length === 0 || !columns || columns.length === 0) {
-      console.error("Rows or columns are not defined.");
-      return;
-    }
-
-    // Priprema zaglavlja CSV-a
-    const header = columns.map((column) => column.Header);
-
-    // Priprema podataka za CSV
-    const csvData = rows.map((row) => {
-      return row.cells.map((cell) => cell.value);
-    });
-
-    // Spajanje zaglavlja i podataka CSV-a
-    const csvContent = [header, ...csvData]
-      .map((row) => row.join(","))
-      .join("\n");
-
-    // Kreiranje CSV datoteke
-    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
-    const filename = "data.csv";
-
-    // Snimanje CSV datoteke
-    if (navigator.msSaveBlob) {
-      // Internet Explorer
-      navigator.msSaveBlob(blob, filename);
-    } else {
-      // Ostali preglednici
-      const link = document.createElement("a");
-      if (link.download !== undefined) {
-        const url = URL.createObjectURL(blob);
-        link.setAttribute("href", url);
-        link.setAttribute("download", filename);
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      } else {
-        console.error("Browser does not support file download.");
-      }
-    }
-  };
+    useTable({ columns, data });
 
   return (
     <div>
       <button>
-        <a href="index.html">index.html</a>
+        <a href="index.html">Index.html</a>
       </button>
-      <div>
-        <label>
-          Tekst za pretraživanje:
-          <input
-            type="text"
-            value={searchText}
-            onChange={(e) => setSearchText(e.target.value)}
-          />
-        </label>
-        <br />
-        <label>
-          Odaberi atribut:
-          <select
-            value={selectedAttribute}
-            onChange={(e) => setSelectedAttribute(e.target.value)}
-          >
-            <option value="all">Svi atributi</option>
-            {columns.map((column) => (
-              <option
-                key={column.accessor}
-                value={column.accessor.split(".")[1]}
-              >
-                {column.Header}
-              </option>
-            ))}
-          </select>
-        </label>
-        <br />
-        <button onClick={handleSearch}>Pretraži</button>
-        <br />
-        <br />
-      </div>
-      <table {...getTableProps()} border="1">
+      <label htmlFor="searchText">Tekst za pretraživanje:</label>
+      <input
+        type="text"
+        id="searchText"
+        value={searchText}
+        onChange={(e) => setSearchText(e.target.value)}
+      />
+
+      <label htmlFor="attribute">Odaberi atribut:</label>
+      <select
+        id="attribute"
+        value={selectedAttribute}
+        onChange={(e) => setSelectedAttribute(e.target.value)}
+      >
+        <option value="all">Svi atributi</option>
+        <option value="imeLjubimac">Ime ljubimca</option>
+        <option value="vrsta">Vrsta</option>
+        <option value="spol">Spol</option>
+        <option value="dob">Dob</option>
+        <option value="boja">Boja</option>
+        <option value="prehrana">Prehrana</option>
+        <option value="adresa">Adresa</option>
+        <option value="veterinar">Veterinar</option>
+        <option value="imeVlasnika">Ime vlasnika</option>
+        <option value="prezimeVlasnika">Prezime vlasnika</option>
+      </select>
+
+      <button onClick={handleSearch}>Pretraži</button>
+      <button onClick={exportToCSV}>Export to CSV</button>
+      <button onClick={exportToJSON}>Export to JSON</button>
+
+      <table {...getTableProps()} style={{ marginTop: "20px" }}>
         <thead>
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => (
-                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                  {column.render("Header")}
-                  {column.isSorted ? (column.isSortedDesc ? " ↓" : " ↑") : " ↕"}
-                </th>
+                <th {...column.getHeaderProps()}>{column.render("Header")}</th>
               ))}
             </tr>
           ))}
@@ -212,19 +184,8 @@ const DataTable = () => {
           })}
         </tbody>
       </table>
-      <div className="buttons">
-        {/* Link za preuzimanje JSON-a */}
-        <button onClick={generateJSON} className="json">
-          Preuzmi JSON
-        </button>
-
-        {/* Link za preuzimanje CSV-a */}
-        <button onClick={generateCSV} className="csv">
-          Preuzmi CSV
-        </button>
-      </div>
     </div>
   );
 };
 
-export default DataTable;
+export default LjubimciDataTable;
