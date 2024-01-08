@@ -73,7 +73,6 @@ const LjubimciDataTable: React.FC = () => {
           adresa: ljubimac.adresa,
           veterinar: ljubimac.veterinar,
           vlasnik: {
-            id: ljubimac.idLjubimac,
             ime: ljubimac.imeVlasnika,
             prezime: ljubimac.prezimeVlasnika,
           },
@@ -126,40 +125,56 @@ const LjubimciDataTable: React.FC = () => {
     useTable({ columns, data });
 
   return (
-    <div>
-      <button>
+    <div className="dataTableContainer">
+      <button id="indexBtn">
         <a href="index.html">Index.html</a>
       </button>
-      <label htmlFor="searchText">Tekst za pretraživanje:</label>
-      <input
-        type="text"
-        id="searchText"
-        value={searchText}
-        onChange={(e) => setSearchText(e.target.value)}
-      />
+      <div className="navContainer">
+        <div className="searchContainer">
+          <label id="searchLabel" htmlFor="searchText">
+            Polje za pretraživanje
+          </label>
+          <input
+            type="text"
+            id="searchText"
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+            placeholder="Upisite vrijednost"
+          />
+        </div>
+        <div className="attributeContainer">
+          <label id="attributeLabel" htmlFor="attribute">
+            Odaberi atribut:
+          </label>
+          <select
+            id="attribute"
+            value={selectedAttribute}
+            onChange={(e) => setSelectedAttribute(e.target.value)}
+          >
+            <option value="all">Svi atributi</option>
+            <option value="imeLjubimac">Ime ljubimca</option>
+            <option value="vrsta">Vrsta</option>
+            <option value="spol">Spol</option>
+            <option value="dob">Dob</option>
+            <option value="boja">Boja</option>
+            <option value="prehrana">Prehrana</option>
+            <option value="adresa">Adresa</option>
+            <option value="veterinar">Veterinar</option>
+            <option value="imeVlasnika">Ime vlasnika</option>
+            <option value="prezimeVlasnika">Prezime vlasnika</option>
+          </select>
+        </div>
 
-      <label htmlFor="attribute">Odaberi atribut:</label>
-      <select
-        id="attribute"
-        value={selectedAttribute}
-        onChange={(e) => setSelectedAttribute(e.target.value)}
-      >
-        <option value="all">Svi atributi</option>
-        <option value="imeLjubimac">Ime ljubimca</option>
-        <option value="vrsta">Vrsta</option>
-        <option value="spol">Spol</option>
-        <option value="dob">Dob</option>
-        <option value="boja">Boja</option>
-        <option value="prehrana">Prehrana</option>
-        <option value="adresa">Adresa</option>
-        <option value="veterinar">Veterinar</option>
-        <option value="imeVlasnika">Ime vlasnika</option>
-        <option value="prezimeVlasnika">Prezime vlasnika</option>
-      </select>
-
-      <button onClick={handleSearch}>Pretraži</button>
-      <button onClick={exportToCSV}>Export to CSV</button>
-      <button onClick={exportToJSON}>Export to JSON</button>
+        <button id="searchBtn" onClick={handleSearch}>
+          Pretraži
+        </button>
+        <button id="csvBtn" onClick={exportToCSV}>
+          Export to CSV
+        </button>
+        <button id="jsonBtn" onClick={exportToJSON}>
+          Export to JSON
+        </button>
+      </div>
 
       <table {...getTableProps()} style={{ marginTop: "20px" }}>
         <thead>

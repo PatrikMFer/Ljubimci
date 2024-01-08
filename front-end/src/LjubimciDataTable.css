@@ -1,9 +1,92 @@
+.dataTableContainer {
+  display: flex;
+  flex-direction: column;
+  width: 1075px;
+  margin: 0 auto 0 auto;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 12px 15px 12px 15px;
+}
+
+#indexBtn {
+  height: 40px;
+  width: 100px;
+}
+
+.navContainer {
+  margin: 40px auto 40px auto;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.searchContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+#searchLabel {
+  margin: 0 0 10px 0;
+  font-weight: 525;
+  font-size: 1.3rem;
+}
+
+#searchText {
+  padding: 0 0 0 10px;
+  font-size: 1rem;
+  width: 250px;
+  height: 40px;
+  border-radius: 5px;
+  border: 1px solid gray;
+}
+
+.attributeContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+#attributeLabel {
+  margin: 0 0 10px 0;
+  font-weight: 525;
+  font-size: 1.3rem;
+}
+
+#attribute {
+  padding: 0 0 0 10px;
+  font-size: 1rem;
+  width: 250px;
+  height: 42px;
+  border-radius: 5px;
+  border: 1px solid gray;
+}
+
+#searchBtn,
+#csvBtn,
+#jsonBtn {
+  height: 40px;
+  font-weight: 550;
+}
+
 table {
   background: rgb(234 234 234);
   border-collapse: separate;
   border: solid black 1px;
   border-radius: 6px;
   text-align: center;
+  margin: 0 auto 0 auto;
+  width: 1075px;
 }
 
 td,
@@ -21,27 +104,5 @@ td:first-child,
 th:first-child {
   border-left: none;
 }
-
-/* 
-
-button {
-  border-radius: 5px;
-  background: #007bff;
-  color: white;
-  border: none;
-  padding: 7px;
-}
-
-.csv,
-.json {
-  background: #2aed70;
-  border: 2px solid black;
-  color: black;
-}
-
-.buttons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-} */
+/* .attributeContainer; */
+/* #attributeLabel */
