@@ -61,7 +61,7 @@ public class LjubimacController {
             throw new EntityNotFoundException("Kolekcija je prazna");
         }
 
-        ApiResponseWrapper<List<LjubimacResponse>> apiResponseWrapper = new ApiResponseWrapper<>("OK", "Dohvaćena je cijela kolekcija ljubimaca", ljubimacResponses);
+        ApiResponseWrapper<List<LjubimacResponse>> apiResponseWrapper = new ApiResponseWrapper<>("OK", "Dohvaćena je kolekcija ljubimaca", ljubimacResponses);
         return ResponseEntity.ok(apiResponseWrapper);
     }
 
