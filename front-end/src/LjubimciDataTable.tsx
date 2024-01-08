@@ -117,7 +117,6 @@ const LjubimciDataTable: React.FC = () => {
     return `${headers}\n${rows.join("\n")}`;
   };
 
-  // react-table setup
   const columns = React.useMemo(
     () => [
       { Header: "ID", accessor: "idLjubimac" },
