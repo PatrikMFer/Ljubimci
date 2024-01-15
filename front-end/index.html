@@ -8,13 +8,29 @@
       content="Ovaj repozitorij sadrži podatke o različitim ljubimcima"
     />
     <meta name="author" content="Patrik Marinić" />
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
     <link rel="stylesheet" href="./index.css">
     <title>Ljubimci - Skup podataka</title>
   </head>
 
 
   <body>
-
+    <div class="buttons">
+      <button type="button" id="loginBtn">
+        <a href="#" >Prijava</a>
+      </button>
+      <button type="button" id="userProfileBtn">
+        <a href="#" >Korisnički profil</a>
+      </button>
+      <button type="button" id="refreshDataBtn">
+        <a href="#" >Osvježi preslike</a>
+      </button>
+      <button type="button" id="logoutBtn">
+        <a href="#">Odjava</a>
+      </button>
+    </div>
     <div class="buttons">
       <button type="button" id="dataTableBtn">
         <a href="datatable.html">Datatable.html</a>
@@ -59,5 +75,8 @@
               <p class="indent"><b>2. Prezime:</b> Prezime vlasnika.</p>
         </p>
     </div>
+    <script type="module" src="./index.js"></script>
   </body>
 </html>
+
+
