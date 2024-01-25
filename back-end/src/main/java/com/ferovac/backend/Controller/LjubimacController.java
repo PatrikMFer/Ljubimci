@@ -1,5 +1,8 @@
 package com.ferovac.backend.Controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.ferovac.backend.Entity.Ljubimac;
 import com.ferovac.backend.Entity.Vlasnik;
 import com.ferovac.backend.Exception.ElementCreationException;
@@ -43,11 +46,11 @@ public class LjubimacController {
     }
 
     //  Get za dohvacanje cijele kolekcije
-    @GetMapping()
-    public ResponseEntity<ApiResponseWrapper<?>> getLjubimciWithVlasnici(
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> getLjubimciWithVlasnici(
             @RequestParam(required = false, defaultValue = "") String searchText,
             @RequestParam(required = false, defaultValue = "all") String attribute
-    ) {
+    ) throws IOException {
         List<Ljubimac> ljubimci;
 
         if ("all".equals(attribute)) {
@@ -71,7 +74,50 @@ public class LjubimacController {
         }
 
         ApiResponseWrapper<List<LjubimacResponse>> apiResponseWrapper = new ApiResponseWrapper<>("OK", "Dohvaćena je kolekcija ljubimaca", ljubimacResponses);
-        return ResponseEntity.ok(apiResponseWrapper);
+
+        // Postavi semantički kontekst
+        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectNode jsonLdContext = objectMapper.createObjectNode();
+        jsonLdContext.put("schema", "http://schema.org/");
+        jsonLdContext.put("ljubimac", "https://schema.org/Pet");
+        jsonLdContext.put("vlasnik", "https://schema.org/Person");
+
+        // Postavi podatke u željenom redoslijedu
+        ObjectNode jsonResponse = objectMapper.createObjectNode();
+        jsonResponse.set("@context", jsonLdContext);
+        jsonResponse.put("status", apiResponseWrapper.getStatus());
+        jsonResponse.put("message", apiResponseWrapper.getMessage());
+
+        ArrayNode responseArray = objectMapper.createArrayNode();
+        for (LjubimacResponse ljubimacResponse : ljubimacResponses) {
+            ObjectNode ljubimacNode = objectMapper.valueToTree(ljubimacResponse);
+
+            // Zamijeni ključ "imeVlasnika" s "schema:ownerName"
+            ljubimacNode.put("schema:ownerName", ljubimacNode.get("imeVlasnika"));
+            ljubimacNode.remove("imeVlasnika");
+
+            // Zamijeni ključ "prezimeVlasnika" s "schema:ownerLastName"
+            ljubimacNode.put("schema:ownerLastName", ljubimacNode.get("prezimeVlasnika"));
+            ljubimacNode.remove("prezimeVlasnika");
+
+            // Dodaj element u ArrayNode
+            responseArray.add(ljubimacNode);
+        }
+
+        jsonResponse.set("response", responseArray);
+
+
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.set(HttpHeaders.CONTENT_TYPE, "application/ld+json");
+
+        // Zamijeni ključeve s odgovarajućim imenima
+        String jsonLdResponse = jsonResponse.toPrettyString();
+
+        // Vrati odgovor s dodanim JSON-LD kontekstom i semantičkim informacijama
+        return ResponseEntity.ok()
+                .headers(headers)
+                .body(jsonLdResponse);
     }
 
 

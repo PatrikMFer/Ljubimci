@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useTable } from "react-table";
-import "./LjubimciDataTable.css";
+import "./DataTablePage.css";
 
 interface Ljubimac {
   idLjubimac: number;
@@ -12,11 +12,10 @@ interface Ljubimac {
   prehrana: string;
   adresa: string;
   veterinar: string;
-  imeVlasnika: string;
-  prezimeVlasnika: string;
+
 }
 
-const LjubimciDataTable: React.FC = () => {
+const DataTablePage: React.FC = () => {
   const [data, setData] = useState<Ljubimac[]>([]);
   const [searchText, setSearchText] = useState<string>("");
   const [selectedAttribute, setSelectedAttribute] = useState<string>("all");
@@ -37,6 +36,7 @@ const LjubimciDataTable: React.FC = () => {
         await response.json();
 
       if (result.status === "OK") {
+        console.log(result.response);
         setData(result.response);
       } else {
         console.error("Error fetching data:", result.message);
@@ -87,8 +87,8 @@ const LjubimciDataTable: React.FC = () => {
           adresa: ljubimac.adresa,
           veterinar: ljubimac.veterinar,
           vlasnik: {
-            ime: ljubimac.imeVlasnika,
-            prezime: ljubimac.prezimeVlasnika,
+            ime: ljubimac["schema:ownerName"],
+            prezime: ljubimac["schema:ownerLastName"],
           },
         };
       });
@@ -128,8 +128,8 @@ const LjubimciDataTable: React.FC = () => {
       { Header: "Prehrana", accessor: "prehrana" },
       { Header: "Adresa", accessor: "adresa" },
       { Header: "Veterinar", accessor: "veterinar" },
-      { Header: "Ime vlasnika", accessor: "imeVlasnika" },
-      { Header: "Prezime vlasnika", accessor: "prezimeVlasnika" },
+      { Header: "Ime vlasnika", accessor: "schema:ownerName" },
+      { Header: "Prezime vlasnika", accessor: "schema:ownerLastName" },
     ],
     []
   );
@@ -141,7 +141,7 @@ const LjubimciDataTable: React.FC = () => {
     <div className="dataTableContainer">
       <div className="topContainer">
         <button id="indexBtn">
-          <a href="index.html">Index.html</a>
+          <a href="/">Index.html</a>
         </button>
         <button id="openApiBtn" onClick={exportOpenAPI}>
           Export OpenAPI
@@ -222,4 +222,4 @@ const LjubimciDataTable: React.FC = () => {
   );
 };
 
-export default LjubimciDataTable;
+export default DataTablePage;
