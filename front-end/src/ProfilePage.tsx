@@ -33,6 +33,10 @@ const ProfilePage = () => {
       {!isAuthenticated && (
         <div>
           <p>Error - Not authenticated</p>
+          {(() => {
+            console.error("Error - Not authenticated");
+            return null;
+          })()}
         </div>
       )}
     </>

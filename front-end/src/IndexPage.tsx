@@ -32,6 +32,9 @@ const IndexPage: React.FC = () => {
 
   const handleRefreshSnapshots = async () => {
     try {
+      if (!isAuthenticated) {
+        return console.error("Error - Not authenticated");
+      }
       const fetchedData = await fetchDataFromDatabase();
 
       if (fetchedData !== null) {
