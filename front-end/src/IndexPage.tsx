@@ -1,17 +1,103 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./IndexPage.css";
 import LoginButton from "./LoginButton";
 import LogoutButton from "./LogoutButton";
-import Profile from "./Profile";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useNavigate } from "react-router-dom";
 
 const IndexPage: React.FC = () => {
-  const [isProfileVisible, setIsProfileVisible] = useState(false);
-  const { isLoading, error } = useAuth0();
+  const { isLoading, error, isAuthenticated } = useAuth0();
+  const navigate = useNavigate();
 
-  const toggleProfile = () => {
-    setIsProfileVisible((prev) => !prev);
+  const navigateToProfilePage = () => {
+    navigate("/profile");
   };
+
+  const fetchDataFromDatabase = async () => {
+    try {
+      const response = await fetch("http://localhost:8080/api/ljubimci");
+      const result = await response.json();
+
+      if (result.status === "OK") {
+        return result.response;
+      } else {
+        console.error("Error fetching data:", result.message);
+        return null;
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      return null;
+    }
+  };
+
+  const handleRefreshSnapshots = async () => {
+    try {
+      const fetchedData = await fetchDataFromDatabase();
+
+      if (fetchedData !== null) {
+        await exportToCSV(fetchedData);
+        await exportToJSON(fetchedData);
+      } else {
+        console.error("Error fetching data. Unable to proceed with snapshots.");
+      }
+    } catch (error) {
+      console.error("Error refreshing snapshots:", error);
+    }
+  };
+
+  const exportToCSV = (data) => {
+    try {
+      const csvData = convertToCSV(data);
+      downloadFile(csvData, "ljubimci.csv", "text/csv");
+    } catch (error) {
+      console.error("Error exporting to CSV:", error);
+    }
+  };
+
+  const convertToCSV = (data) => {
+    const headers = Object.keys(data[0]).join(",");
+    const rows = data.map((row) => Object.values(row).join(","));
+    return `${headers}\n${rows.join("\n")}`;
+  };
+
+  const exportToJSON = async (data) => {
+    try {
+      const transformedData = data.map((ljubimac) => {
+        return {
+          id: ljubimac.idLjubimac,
+          ime: ljubimac.imeLjubimac,
+          vrsta: ljubimac.vrsta,
+          spol: ljubimac.spol,
+          dob: ljubimac.dob,
+          boja: ljubimac.boja,
+          prehrana: ljubimac.prehrana,
+          adresa: ljubimac.adresa,
+          veterinar: ljubimac.veterinar,
+          vlasnik: {
+            ime: ljubimac.imeVlasnika,
+            prezime: ljubimac.prezimeVlasnika,
+          },
+        };
+      });
+
+      const jsonData = JSON.stringify(transformedData, null, 2);
+      downloadFile(jsonData, "ljubimci.json", "application/json");
+    } catch (error) {
+      console.error("Error exporting to JSON:", error);
+    }
+  };
+
+  const downloadFile = (data, fileName, fileType) => {
+    const blob = new Blob([data], { type: fileType });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = fileName;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  };
+
   return (
     <>
       <div>
@@ -21,10 +107,16 @@ const IndexPage: React.FC = () => {
           <>
             <LoginButton />
             <LogoutButton />
-            <button type="button" onClick={toggleProfile}>
-              Korisnički profil
-            </button>
-            {isProfileVisible && <Profile />}
+            {isAuthenticated && (
+              <>
+                <button type="button" onClick={navigateToProfilePage}>
+                  Korisnički profil
+                </button>
+                <button type="button" onClick={handleRefreshSnapshots}>
+                  Osvježi preslike
+                </button>
+              </>
+            )}
           </>
         )}
       </div>
