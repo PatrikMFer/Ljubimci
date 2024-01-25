@@ -1,12 +1,16 @@
-import "./App.css";
-import LjubimciDataTable from "./LjubimciDataTable";
+import IndexPage from "./IndexPage";
+import DataTablePage from "./DataTablePage";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div>
-      <LjubimciDataTable />;
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<IndexPage />} />
+        <Route path="/datatable" element={<DataTablePage />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;

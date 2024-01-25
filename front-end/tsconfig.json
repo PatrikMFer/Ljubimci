@@ -20,6 +20,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "src/LjubimciDataTable.tsx"],
+  "include": ["src", "src/DataTablePage.tsx"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

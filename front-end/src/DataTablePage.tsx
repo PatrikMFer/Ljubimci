@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useTable } from "react-table";
-import "./LjubimciDataTable.css";
+import "./DataTablePage.css";
 
 interface Ljubimac {
   idLjubimac: number;
@@ -16,7 +16,7 @@ interface Ljubimac {
   prezimeVlasnika: string;
 }
 
-const LjubimciDataTable: React.FC = () => {
+const DataTablePage: React.FC = () => {
   const [data, setData] = useState<Ljubimac[]>([]);
   const [searchText, setSearchText] = useState<string>("");
   const [selectedAttribute, setSelectedAttribute] = useState<string>("all");
@@ -141,7 +141,7 @@ const LjubimciDataTable: React.FC = () => {
     <div className="dataTableContainer">
       <div className="topContainer">
         <button id="indexBtn">
-          <a href="index.html">Index.html</a>
+          <a href="/">Index.html</a>
         </button>
         <button id="openApiBtn" onClick={exportOpenAPI}>
           Export OpenAPI
@@ -222,4 +222,4 @@ const LjubimciDataTable: React.FC = () => {
   );
 };
 
-export default LjubimciDataTable;
+export default DataTablePage;
