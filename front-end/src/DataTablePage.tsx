@@ -12,8 +12,7 @@ interface Ljubimac {
   prehrana: string;
   adresa: string;
   veterinar: string;
-  imeVlasnika: string;
-  prezimeVlasnika: string;
+
 }
 
 const DataTablePage: React.FC = () => {
@@ -37,6 +36,7 @@ const DataTablePage: React.FC = () => {
         await response.json();
 
       if (result.status === "OK") {
+        console.log(result.response);
         setData(result.response);
       } else {
         console.error("Error fetching data:", result.message);
@@ -87,8 +87,8 @@ const DataTablePage: React.FC = () => {
           adresa: ljubimac.adresa,
           veterinar: ljubimac.veterinar,
           vlasnik: {
-            ime: ljubimac.imeVlasnika,
-            prezime: ljubimac.prezimeVlasnika,
+            ime: ljubimac["schema:ownerName"],
+            prezime: ljubimac["schema:ownerLastName"],
           },
         };
       });
@@ -128,8 +128,8 @@ const DataTablePage: React.FC = () => {
       { Header: "Prehrana", accessor: "prehrana" },
       { Header: "Adresa", accessor: "adresa" },
       { Header: "Veterinar", accessor: "veterinar" },
-      { Header: "Ime vlasnika", accessor: "imeVlasnika" },
-      { Header: "Prezime vlasnika", accessor: "prezimeVlasnika" },
+      { Header: "Ime vlasnika", accessor: "schema:ownerName" },
+      { Header: "Prezime vlasnika", accessor: "schema:ownerLastName" },
     ],
     []
   );

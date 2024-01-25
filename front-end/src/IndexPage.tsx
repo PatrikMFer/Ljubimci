@@ -77,8 +77,8 @@ const IndexPage: React.FC = () => {
           adresa: ljubimac.adresa,
           veterinar: ljubimac.veterinar,
           vlasnik: {
-            ime: ljubimac.imeVlasnika,
-            prezime: ljubimac.prezimeVlasnika,
+            ime: ljubimac["schema:ownerName"],
+            prezime: ljubimac["schema:ownerLastName"],
           },
         };
       });
