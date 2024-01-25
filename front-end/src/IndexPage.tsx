@@ -1,9 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import "./IndexPage.css";
+import LoginButton from "./LoginButton";
+import LogoutButton from "./LogoutButton";
+import Profile from "./Profile";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const IndexPage: React.FC = () => {
+  const [isProfileVisible, setIsProfileVisible] = useState(false);
+  const { isLoading, error } = useAuth0();
+
+  const toggleProfile = () => {
+    setIsProfileVisible((prev) => !prev);
+  };
   return (
-    <div>
+    <>
+      <div>
+        {error && <p>Authentication Error</p>}
+        {!error && isLoading && <p>Loading...</p>}
+        {!error && !isLoading && (
+          <>
+            <LoginButton />
+            <LogoutButton />
+            <button type="button" onClick={toggleProfile}>
+              Korisnički profil
+            </button>
+            {isProfileVisible && <Profile />}
+          </>
+        )}
+      </div>
       <div className="buttons">
         <button type="button" id="dataTableBtn">
           <a href="datatable">Datatable.html</a>
@@ -96,7 +120,7 @@ const IndexPage: React.FC = () => {
           </p>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
